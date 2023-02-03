@@ -21,7 +21,7 @@ public class NetworkLoader : MonoBehaviour
         Application.targetFrameRate = 10;   
 
         var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        ut.ConnectAddress.Address = "localhost";
+        ut.ConnectAddress = "localhost";
         NetworkManager.Singleton.StartServer();
 
 #elif UNITY_EDITOR
