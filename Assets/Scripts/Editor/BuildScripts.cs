@@ -14,8 +14,8 @@ public class BuildScripts : MonoBehaviour
     {
         BuildPlayerOptions buildPlayerOptions = new()
         {
-            scenes = new[] { "Assets/Scenes/TestScene.unity" },
-            locationPathName = "Builds/BuildLinuxServer/LinuxServerTest.x86_64",
+            scenes = new[] { "Assets/Scenes/TitleScene.unity" },
+            locationPathName = "Builds/BuildLinuxServer/RootGameServer.x86_64",
             target = BuildTarget.StandaloneLinux64,
             subtarget = (int)StandaloneBuildSubtarget.Server,
             options = BuildOptions.Development
@@ -48,46 +48,46 @@ public class BuildScripts : MonoBehaviour
         }
     }
 
-    [MenuItem("Build/Build WebGL")]
-    public static void BuildWebGL()
-    {
-        BuildPlayerOptions buildPlayerOptions = new()
-        {
-            scenes = new[] { "Assets/Scenes/TestScene.unity" },
-            locationPathName = "BuildWebGL",
-            target = BuildTarget.LinuxHeadlessSimulation,
-            options = BuildOptions.Development
-        };
+    //[MenuItem("Build/Build WebGL")]
+    //public static void BuildWebGL()
+    //{
+    //    BuildPlayerOptions buildPlayerOptions = new()
+    //    {
+    //        scenes = new[] { "Assets/Scenes/TestScene.unity" },
+    //        locationPathName = "BuildWebGL",
+    //        target = BuildTarget.LinuxHeadlessSimulation,
+    //        options = BuildOptions.Development
+    //    };
 
-        BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-        BuildSummary summary = report.summary;
+    //    BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+    //    BuildSummary summary = report.summary;
 
-        if (summary.result == BuildResult.Succeeded)
-        {
-            Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
-        }
+    //    if (summary.result == BuildResult.Succeeded)
+    //    {
+    //        Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
+    //    }
 
-        if (summary.result == BuildResult.Failed)
-        {
-            Debug.Log("Build failed");
-        }
-    }
+    //    if (summary.result == BuildResult.Failed)
+    //    {
+    //        Debug.Log("Build failed");
+    //    }
+    //}
 
-    [MenuItem("Build/TestCopyToCloud")]
-    public static void CopyToCloud()
-    {
-        //string path = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
+    //[MenuItem("Build/TestCopyToCloud")]
+    //public static void CopyToCloud()
+    //{
+    //    //string path = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
 
-        ProcessStartInfo ProcessInfo;
-        Process Process;
+    //    ProcessStartInfo ProcessInfo;
+    //    Process Process;
 
-        ProcessInfo = new ProcessStartInfo("cmd.exe", "/K " + "scp -r \"C:\\Users\\selft\\Documents\\GitHub\\LinuxServerTest\\Builds\\BuildLinuxServer\" self.trevor@ggj.skipsabeatmusic.com:~");
-        ProcessInfo.CreateNoWindow = false;
-        ProcessInfo.UseShellExecute = true;
+    //    ProcessInfo = new ProcessStartInfo("cmd.exe", "/K " + "scp -r \"C:\\Users\\selft\\Documents\\GitHub\\LinuxServerTest\\Builds\\BuildLinuxServer\" self.trevor@ggj.skipsabeatmusic.com:~");
+    //    ProcessInfo.CreateNoWindow = false;
+    //    ProcessInfo.UseShellExecute = true;
 
-        Process = Process.Start(ProcessInfo);
-        Process.WaitForExit();
-        var exitCode = Process.ExitCode;
-        Process.Close();
-    }
+    //    Process = Process.Start(ProcessInfo);
+    //    Process.WaitForExit();
+    //    var exitCode = Process.ExitCode;
+    //    Process.Close();
+    //}
 }
