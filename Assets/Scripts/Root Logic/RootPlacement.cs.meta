@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fd9018111181bf843ac59c0c66836819
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - verticalConnectorTile: {fileID: 11400000, guid: 60e71750237be9b429a377ce28550a18, type: 2}
+  - horizonalConnectorTile: {instanceID: 0}
+  - leftDownConnectorTile: {instanceID: 0}
+  - leftUpConnectorTile: {instanceID: 0}
+  - rightUpConnectorTile: {instanceID: 0}
+  - rightDownConnectorTile: {instanceID: 0}
+  - leftTipTile: {instanceID: 0}
+  - rightTipTile: {instanceID: 0}
+  - upTipTile: {instanceID: 0}
+  - downTipTile: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
