@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class NetworkLoader : MonoBehaviour
 {
+    public bool EditorCreateOurOwnHost = false;
+
     private void Start()
     {
 
@@ -21,26 +23,30 @@ public class NetworkLoader : MonoBehaviour
         var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
         ut.ConnectAddress.Address = "localhost";
         NetworkManager.Singleton.StartServer();
-#elif UNITY_EDITOR
-        // testing is in place, no need to connect to the cloud.
-        // we can instead be our own server
-        Debug.Log("Detected editor start. Creating our own local server and connecting to it");
-        NetworkManager.Singleton.StartHost();
 
-#elif UNITY_WEBGL
-        // auto connect to the GCP server
-        try
+#elif UNITY_EDITOR
+
+        if (EditorCreateOurOwnHost)
+        {
+            // testing is in place, no need to connect to the cloud.
+            // we can instead be our own server
+            Debug.Log("Detected editor start. Creating our own local server and connecting to it");
+            NetworkManager.Singleton.StartHost();
+        }
+        else
         {
             var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
             ut.ConnectAddress = "ggj.skipsabeatmusic.com";
             NetworkManager.Singleton.StartClient();
         }
-        catch (System.Exception e)
-        {
-            Debug.Log(e);
-        }
+#elif UNITY_WEBGL
+        // auto connect to the server
 
-        DestroyImmediate(this);
+        var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
+        ut.ConnectAddress = "ggj.skipsabeatmusic.com";
+        NetworkManager.Singleton.StartClient();
+
+        Debug.Log(e);
 #endif
 
     }
@@ -49,8 +55,13 @@ public class NetworkLoader : MonoBehaviour
     static void Bootstrap()
     {
         Debug.Log("Instantiating Network Objects");
-        var newObj = Object.Instantiate(Resources.Load("NetworkManagerPrefab"));
-        Object.DontDestroyOnLoad(newObj);
+        var manager = Object.Instantiate(Resources.Load("NetworkManagerPrefab"));
+        Object.DontDestroyOnLoad(manager);
+
+        var serverData = Object.Instantiate(Resources.Load("ServerDataPrefab"));
+        Object.DontDestroyOnLoad(serverData);
+
+
         //DontDestroyOnLoad(newObj);
     }
 }

@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cc2e81fddf8884ba3d2a7d14ac31cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EditorCreateOurOwnHost: 1
 --- !u!114 &7818824199936972071
 MonoBehaviour:
   m_ObjectHideFlags: 0
