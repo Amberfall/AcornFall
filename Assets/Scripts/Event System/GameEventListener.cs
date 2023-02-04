@@ -11,8 +11,6 @@ public class GameEventListener : MonoBehaviour
 
     public CustomGameEvent response;
 
-    
-
     private void OnEnable()
     {
         gameEvent.RegisterListener(this);
@@ -24,7 +22,6 @@ public class GameEventListener : MonoBehaviour
 
     public void onEventRaised(object data)
     {
-        //UnityEngine.Debug.Log("data passed to this event is " + data.ToString());
         response.Invoke(data);
     }
 }

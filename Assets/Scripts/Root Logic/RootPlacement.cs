@@ -248,17 +248,17 @@ public class RootPlacement : MonoBehaviour
         if(tileToCheck.x < -10 || tileToCheck.x > 9 || tileToCheck.y > 0)
         {
             UnityEngine.Debug.Log("Out of bounds. Believe it or not, straight to jail!");
-            onPlayerDied.Raise(default);
+            onPlayerDied.Raise(-currentTileCoord.y);
         }
         else if (rootAlreadyExists(tileToCheck))
         {
             UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-            onPlayerDied.Raise(default);
+            onPlayerDied.Raise(-currentTileCoord.y);
         }
         else if(ranIntoRock(tileToCheck)) 
         {
             UnityEngine.Debug.Log("OUCH... Hit a rock. You lose.");
-            onPlayerDied.Raise(default);
+            onPlayerDied.Raise(-currentTileCoord.y);
         }
         else if(foundWater(tileToCheck)) 
         {
@@ -273,7 +273,7 @@ public class RootPlacement : MonoBehaviour
         if(waterRemaining <= 0)
         {
             UnityEngine.Debug.Log("sooo.. Thirsty... Can't go on... You Lose.");
-            onPlayerDied.Raise(default);
+            onPlayerDied.Raise(-currentTileCoord.y);
         }
     }
 
