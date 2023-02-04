@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -64,6 +65,36 @@ public class RootPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            if(prevDirection != DIRECTION.DOWN)
+            {
+                currentDirection = DIRECTION.UP;
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            if(prevDirection != DIRECTION.UP)
+            {
+                currentDirection = DIRECTION.DOWN;
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            if(prevDirection != DIRECTION.RIGHT)
+            {
+                currentDirection = DIRECTION.LEFT;
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.D))
+        {
+            if(prevDirection != DIRECTION.LEFT)
+            {
+                currentDirection = DIRECTION.RIGHT;
+            }
+            
+        }
+
         Move();
         
     }
