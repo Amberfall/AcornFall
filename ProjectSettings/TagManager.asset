@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Dirt
+    uniqueID: 3721402787
+    locked: 0
+  - name: Rocks
+    uniqueID: 3717288505
+    locked: 0
+  - name: Water
+    uniqueID: 1121358091
+    locked: 0
+  - name: Roots
+    uniqueID: 4173599175
+    locked: 0
