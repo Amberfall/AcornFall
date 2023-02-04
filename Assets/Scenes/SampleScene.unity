@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1330d2adcea89d946b46c42695f6cf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depthRequiredToWin: 0
+  depthRequiredToWin: 500
 --- !u!4 &579163342
 Transform:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c1c35813e8237449998695a8d05e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6046149424413480234
+--- !u!114 &6046149424413480239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,13 +630,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 6eb3429d87b48cd43934fc56c756ed14, type: 2}
+  gameEvent: {fileID: 11400000, guid: 8cfad37bedb1f164a8f05d8ac02dfb5a, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6046149424413480233}
         m_TargetAssemblyTypeName: CanvasController, Assembly-CSharp
-        m_MethodName: setWaterRemainingText
+        m_MethodName: setDepthGuageText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
