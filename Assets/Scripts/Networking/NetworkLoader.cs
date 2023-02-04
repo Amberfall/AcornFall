@@ -14,17 +14,7 @@ public class NetworkLoader : MonoBehaviour
     {
 
 
-#if UNITY_SERVER
-        // this is dumb, but it works, so it's not dumb.
-        // except Unity is dumb.
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 10;   
-
-        var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        ut.ConnectAddress = "localhost";
-        NetworkManager.Singleton.StartServer();
-
-#elif UNITY_EDITOR
+#if UNITY_EDITOR
 
         if (EditorCreateOurOwnHost)
         {
@@ -36,9 +26,21 @@ public class NetworkLoader : MonoBehaviour
         else
         {
             var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-            ut.ConnectAddress = "ggj.skipsabeatmusic.com";
+            
+            var ip = System.Net.Dns.GetHostEntry("ggj.skipsabeatmusic.com");
+            //Debug.Log(ip.AddressList[0].ToString());
+            ut.ConnectAddress = ip.AddressList[0].ToString();
             NetworkManager.Singleton.StartClient();
         }
+#elif UNITY_SERVER
+        // this is dumb, but it works, so it's not dumb.
+        // except Unity is dumb.
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 10;   
+
+        var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
+        ut.ConnectAddress = "localhost";
+        NetworkManager.Singleton.StartServer();
 #elif UNITY_WEBGL
         // auto connect to the server
 
@@ -60,8 +62,5 @@ public class NetworkLoader : MonoBehaviour
 
         var serverData = Object.Instantiate(Resources.Load("ServerDataPrefab"));
         Object.DontDestroyOnLoad(serverData);
-
-
-        //DontDestroyOnLoad(newObj);
     }
 }

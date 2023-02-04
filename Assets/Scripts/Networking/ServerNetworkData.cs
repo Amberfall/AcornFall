@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Events;
 
 /// <summary>
 /// Gets and recieves data on the server.
@@ -12,13 +13,18 @@ public class ServerNetworkData : NetworkBehaviour
     private readonly NetworkVariable<ServerDataState> _serverDataState =
         new NetworkVariable<ServerDataState>();
 
-    public int Fails { get => _fails; set => _fails = value; }
-    public int Wins { get => _wins; set => _wins = value; }
+    public bool HasRead = false;
+    public UnityEvent StateReadEvent;
+
+    public int Fails { get => _fails; private set => _fails = value; }
+    public int Wins { get => _wins; private set => _wins = value; }
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer)
+        {
             ReadState();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -50,7 +56,10 @@ public class ServerNetworkData : NetworkBehaviour
     {
         Debug.Log("Reading State");
         Fails = _serverDataState.Value.Fails;
-        Wins = _serverDataState.Value.Wins;        
+        Wins = _serverDataState.Value.Wins;
+
+        StateReadEvent.Invoke();
+        HasRead = true;
     }
 
     struct ServerDataState : INetworkSerializable
