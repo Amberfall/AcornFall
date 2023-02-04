@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff56ac2790574e942bb04f6e2a7e0747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothTime: 1
 --- !u!1 &583939798
 GameObject:
   m_ObjectHideFlags: 0
@@ -65204,10 +65205,10 @@ MonoBehaviour:
   rockTileMap: {fileID: 1502112353}
   waterTileMap: {fileID: 1183659727}
   currentTileCoord: {x: 0, y: 0, z: 0}
-  speed: 0.5
+  speed: 0.2
   waterRemaining: 100
   waterCostPerTile: 1
-  waterGainedFromDeposit: 25
+  waterGainedFromDeposit: 50
 --- !u!4 &1083941718
 Transform:
   m_ObjectHideFlags: 0

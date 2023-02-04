@@ -63,14 +63,12 @@ public class RootPlacement : MonoBehaviour
     [SerializeField] int waterCostPerTile = 1;
     [SerializeField] int waterGainedFromDeposit = 25;
 
-    // Start is called before the first frame update
     void Start()
     {
         rootTilemap.SetTile(currentTileCoord, downTipTile);
         timeUntilMovement = speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
         checkForUserInput();
