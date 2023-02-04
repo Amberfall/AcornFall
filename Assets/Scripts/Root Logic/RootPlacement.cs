@@ -45,7 +45,10 @@ public class RootPlacement : MonoBehaviour
     private Vector3Int prevTileCoord;
 
     //how many seconds until the player moves a tile
-    public float speed = 1f;
+    public float speed = .1f;
+    public float maxSpeed = .1f;
+    public float minSpeed = .5f;
+    public float timeToReachMaxSpeed = 5f;
     private float timeUntilMovement;
 
     DIRECTION currentDirection = DIRECTION.DOWN;
@@ -80,12 +83,14 @@ public class RootPlacement : MonoBehaviour
         rootTilemap.SetTile(currentTileCoord, downTipTile);
         timeUntilMovement = speed;
         rootTip.transform.position = rootTilemap.GetCellCenterWorld(currentTileCoord);
+        StartCoroutine(RampUpSpeedOnStart());
     }
 
     void Update()
     {
         checkForUserInput();
         moveTip();
+        SlowSpeedWhenThirsty();
         Move();
     }
 
@@ -228,6 +233,32 @@ public class RootPlacement : MonoBehaviour
         {
             timeUntilMovement -= Time.deltaTime;
         }
+
+    }
+    private void SlowSpeedWhenThirsty()
+    {
+        if(waterRemaining < 50)
+        {
+            float speedMultiplier = waterRemaining / 50;
+
+            float targetSpeed = Mathf.Clamp(speed * speedMultiplier, minSpeed, maxSpeed);
+
+            speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime / timeToReachMaxSpeed);
+        }
+
+    }
+
+    IEnumerator RampUpSpeedOnStart()
+    {
+        speed = minSpeed;
+        do
+        {
+            UnityEngine.Debug.Log("modifying the speed...");
+            speed = Mathf.MoveTowards(speed, maxSpeed, Time.deltaTime / (timeToReachMaxSpeed * 2));
+            yield return new WaitForEndOfFrame();
+        } while (speed > maxSpeed);
+        
+        yield break;
 
     }
 
