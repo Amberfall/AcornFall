@@ -9,10 +9,10 @@ using TMPro;
 
 public class TitleController : MonoBehaviour
 {
-
     public TextMeshProUGUI LoadingTM;
     public CanvasGroup ButtonsGroup;
     public CanvasGroup FullScreenImage;
+    public CanvasGroup UIGroup;
 
     ServerNetworkData _snd;
 
@@ -48,6 +48,7 @@ public class TitleController : MonoBehaviour
         var sequence = DOTween.Sequence();
 
         sequence.Append(Camera.main.transform.DOMove(new Vector3(5, -5, -10), 2f));
+        sequence.Insert(0.1f, UIGroup.DOFade(0, 0.5f));
         sequence.Append(Camera.main.DOOrthoSize(1, 2f));
         sequence.Insert(2.5f, Camera.main.transform.DOLocalRotate(new Vector3(0, 0, 360), 2f, RotateMode.FastBeyond360));
         sequence.Insert(3.0f, FullScreenImage.DOFade(1f, 1f));
