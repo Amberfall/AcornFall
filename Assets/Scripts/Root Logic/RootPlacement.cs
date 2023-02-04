@@ -110,6 +110,11 @@ public class RootPlacement : MonoBehaviour
                 case DIRECTION.UP:
                     
                     currentTileCoord += new Vector3Int(0, 1, 0);
+                    if(rootAlreadyExists(currentTileCoord))
+                    {
+                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
+                        //TODO: fire lose event
+                    }
 
                     //set newest tile
                     rootTilemap.SetTile(currentTileCoord, upTipTile);
@@ -140,6 +145,12 @@ public class RootPlacement : MonoBehaviour
 
                     currentTileCoord += new Vector3Int(0, -1, 0);
 
+                    if (rootAlreadyExists(currentTileCoord))
+                    {
+                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
+                        //TODO: fire lose event
+                    }
+
                     rootTilemap.SetTile(currentTileCoord, downTipTile);
                     
                     //change previous tile to correct connector piece
@@ -167,6 +178,12 @@ public class RootPlacement : MonoBehaviour
 
                     currentTileCoord += new Vector3Int(-1, 0, 0);
 
+                    if (rootAlreadyExists(currentTileCoord))
+                    {
+                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
+                        //TODO: fire lose event
+                    }
+
                     rootTilemap.SetTile(currentTileCoord, leftTipTile);
 
                     //change previous tile to correct connector piece
@@ -193,6 +210,12 @@ public class RootPlacement : MonoBehaviour
                 case DIRECTION.RIGHT:
 
                     currentTileCoord += new Vector3Int(1, 0, 0);
+
+                    if (rootAlreadyExists(currentTileCoord))
+                    {
+                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
+                        //TODO: fire lose event
+                    }
 
                     rootTilemap.SetTile(currentTileCoord, rightTipTile);
 
@@ -224,5 +247,9 @@ public class RootPlacement : MonoBehaviour
             timeUntilMovement -= Time.deltaTime;
         }
 
+    }
+    private bool rootAlreadyExists(Vector3Int tileToCheck)
+    {
+        return rootTilemap.GetTile(tileToCheck) != null;
     }
 }
