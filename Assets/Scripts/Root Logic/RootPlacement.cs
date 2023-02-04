@@ -36,7 +36,7 @@ public class RootPlacement : MonoBehaviour
     /*****  MOVEMENT VARIABLES  ******/
     
     //reference to the tile the player is now moving to. This should always be a tip piece
-    private Vector3Int currentTileCoord = new Vector3Int(0, -4, 0);
+    public Vector3Int currentTileCoord = new Vector3Int(0, 0, 0);
 
     //reference to the tile the player last resided in. This one needs to be changed from tip to connector
     private Vector3Int prevTileCoord;
