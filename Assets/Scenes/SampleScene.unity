@@ -637,7 +637,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6046149424413480233}
         m_TargetAssemblyTypeName: CanvasController, Assembly-CSharp
         m_MethodName: setWaterRemainingText
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

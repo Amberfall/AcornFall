@@ -11,6 +11,8 @@ public class GameEventListener : MonoBehaviour
 
     public CustomGameEvent response;
 
+    
+
     private void OnEnable()
     {
         gameEvent.RegisterListener(this);

@@ -8,8 +8,9 @@ public class CanvasController : MonoBehaviour
     [SerializeField] TextMeshProUGUI waterRemainingText;
     [SerializeField] TextMeshProUGUI depthGaugeText;
 
-    public void setWaterRemainingText(int waterRemaining)
+    public void setWaterRemainingText(object data)
     {
+        var waterRemaining = (int)data;
         UnityEngine.Debug.Log("i've been called! water remaining is " + waterRemaining.ToString());
         waterRemainingText.text = waterRemaining.ToString();
     }
