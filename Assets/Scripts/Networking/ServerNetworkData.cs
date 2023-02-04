@@ -25,6 +25,11 @@ public class ServerNetworkData : NetworkBehaviour
         {
             ReadState();
         }
+        else
+        {
+            HasRead = true;
+            StateReadEvent.Invoke();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]

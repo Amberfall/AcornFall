@@ -20,10 +20,6 @@ public class TitleController : MonoBehaviour
     private void Awake()
     {
 
-    }
-
-    void Start()
-    {
         ButtonsGroup.alpha = 0f;
         ButtonsGroup.interactable = false;
 
@@ -35,12 +31,10 @@ public class TitleController : MonoBehaviour
         }
         else
         {
-            _snd.StateReadEvent.AddListener(NetworkDataRead);
         }
     }
 
-
-    private void NetworkDataRead()
+    public void NetworkDataRead()
     {
         LoadingTM.DOKill();
         LoadingTM.DOFade(0f, 0.5f);
@@ -60,7 +54,7 @@ public class TitleController : MonoBehaviour
 
         sequence.OnComplete(() =>
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         });
     }
 }

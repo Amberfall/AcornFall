@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.community.netcode.transport.websocket": "https://github.com/Unity-Technologies/multiplayer-community-contributions.git?path=/Transports/com.community.netcode.transport.websocket",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.2d.tilemap.extras": "2.2.4",

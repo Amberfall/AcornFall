@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Netcode.Transports.UNET;
+using Netcode.Transports.WebSocket;
 using UnityEngine;
 
 
@@ -12,8 +12,6 @@ public class NetworkLoader : MonoBehaviour
 
     private void Start()
     {
-
-
 #if UNITY_EDITOR
 
         if (EditorCreateOurOwnHost)
@@ -25,11 +23,8 @@ public class NetworkLoader : MonoBehaviour
         }
         else
         {
-            var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-            
-            var ip = System.Net.Dns.GetHostEntry("ggj.skipsabeatmusic.com");
-            //Debug.Log(ip.AddressList[0].ToString());
-            ut.ConnectAddress = ip.AddressList[0].ToString();
+            var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
+            transport.ConnectAddress = "ggj.skipsabeatmusic.com";
             NetworkManager.Singleton.StartClient();
         }
 #elif UNITY_SERVER
@@ -38,29 +33,30 @@ public class NetworkLoader : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 10;   
 
-        var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        ut.ConnectAddress = "localhost";
+        var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
+        transport.ConnectAddress = "localhost";
         NetworkManager.Singleton.StartServer();
 #elif UNITY_WEBGL
         // auto connect to the server
-
-        var ut = NetworkManager.Singleton.GetComponent<UNetTransport>();
-        ut.ConnectAddress = "ggj.skipsabeatmusic.com";
-        NetworkManager.Singleton.StartClient();
-
-        Debug.Log(e);
+        var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
+        transport.ConnectAddress = "34.105.51.253";
+        var success = NetworkManager.Singleton.StartClient();
+        if (success == false)
+        {
+            Debug.LogError("Could not connect to server");
+        }
 #endif
 
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Bootstrap()
-    {
-        Debug.Log("Instantiating Network Objects");
-        var manager = Object.Instantiate(Resources.Load("NetworkManagerPrefab"));
-        Object.DontDestroyOnLoad(manager);
+    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    //static void Bootstrap()
+    //{
+    //    Debug.Log("Instantiating Network Objects");
+    //    var manager = Object.Instantiate(Resources.Load("NetworkManagerPrefab"));
+    //    Object.DontDestroyOnLoad(manager);
 
-        var serverData = Object.Instantiate(Resources.Load("ServerDataPrefab"));
-        Object.DontDestroyOnLoad(serverData);
-    }
+    //    var serverData = Object.Instantiate(Resources.Load("ServerDataPrefab"));
+    //    Object.DontDestroyOnLoad(serverData);
+    //}
 }

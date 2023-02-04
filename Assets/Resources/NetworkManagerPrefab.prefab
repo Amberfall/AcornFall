@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5070536134542740151}
   - component: {fileID: 5070536134542740150}
   - component: {fileID: 7076837525670347128}
-  - component: {fileID: 7818824199936972071}
+  - component: {fileID: -1850867081652800918}
   m_Layer: 0
   m_Name: NetworkManagerPrefab
   m_TagString: Untagged
@@ -50,9 +50,19 @@ MonoBehaviour:
   LogLevel: 1
   NetworkConfig:
     ProtocolVersion: 0
-    NetworkTransport: {fileID: 7818824199936972071}
+    NetworkTransport: {fileID: -1850867081652800918}
     PlayerPrefab: {fileID: 612033706340760678, guid: 062a53bc6fee2504f8f833e0a893e3a2, type: 3}
-    NetworkPrefabs: []
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 612033706340760678, guid: 062a53bc6fee2504f8f833e0a893e3a2, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8737369901504861315, guid: 73859bc16e5aa9248ad3dfe0f61347a7, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -60,7 +70,7 @@ MonoBehaviour:
     EnableTimeResync: 0
     TimeResyncInterval: 30
     EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
+    EnableSceneManagement: 0
     ForceSamePrefabs: 1
     RecycleNetworkIds: 1
     NetworkIdRecycleDelay: 120
@@ -81,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EditorCreateOurOwnHost: 0
---- !u!114 &7818824199936972071
+--- !u!114 &-1850867081652800918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,13 +100,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5070536134542740148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84c2d8dfe509a34fb59e2b81f8e1319, type: 3}
+  m_Script: {fileID: 11500000, guid: 54618226c9df54608af7731199ed5f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessageBufferSize: 5120
-  MaxConnections: 100
-  MaxSentMessageQueueSize: 128
   ConnectAddress: 127.0.0.1
-  ConnectPort: 7777
-  ServerListenPort: 7777
-  MessageSendMode: 0
+  Path: /netcode
+  Port: 7777
+  SecureConnection: 0
+  AllowForwardedRequest: 0
+  CertificateBase64String: 
