@@ -32,6 +32,9 @@ public class RootPlacement : MonoBehaviour
     [SerializeField] private Tilemap rockTileMap;
     [SerializeField] private Tilemap waterTileMap;
 
+    //animated root tip
+    [SerializeField] private GameObject rootTip;
+
     
     /*****  MOVEMENT VARIABLES  ******/
     
@@ -42,7 +45,7 @@ public class RootPlacement : MonoBehaviour
     private Vector3Int prevTileCoord;
 
     //how many seconds until the player moves a tile
-    [SerializeField] private float speed = 1f;
+    public float speed = 1f;
     private float timeUntilMovement;
 
     DIRECTION currentDirection = DIRECTION.DOWN;
@@ -67,11 +70,13 @@ public class RootPlacement : MonoBehaviour
     {
         rootTilemap.SetTile(currentTileCoord, downTipTile);
         timeUntilMovement = speed;
+        rootTip.transform.position = rootTilemap.GetCellCenterWorld(currentTileCoord);
     }
 
     void Update()
     {
         checkForUserInput();
+        moveTip();
         Move();
     }
 
@@ -211,6 +216,9 @@ public class RootPlacement : MonoBehaviour
         }
 
     }
+
+    /****** COLLISION DETECTION METHODS *******/
+
     private bool rootAlreadyExists(Vector3Int tileToCheck)
     {
         return rootTilemap.GetTile(tileToCheck) != null;
@@ -225,7 +233,12 @@ public class RootPlacement : MonoBehaviour
     }
     private void handleCollisions(Vector3Int tileToCheck)
     {
-        if (rootAlreadyExists(tileToCheck))
+        if(tileToCheck.x < -10 || tileToCheck.x > 9 || tileToCheck.y > 0)
+        {
+            UnityEngine.Debug.Log("Out of bounds. Believe it or not, straight to jail!");
+            //TODO: fire lose event
+        }
+        else if (rootAlreadyExists(tileToCheck))
         {
             UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
             //TODO: fire lose event
@@ -238,7 +251,7 @@ public class RootPlacement : MonoBehaviour
         else if(foundWater(tileToCheck)) 
         {
             UnityEngine.Debug.Log("SLUUURP... Tasty water!");
-            //TODO: increase water guage
+            waterRemaining += waterGainedFromDeposit;
         }
     }
 
@@ -250,6 +263,35 @@ public class RootPlacement : MonoBehaviour
             //TODO: fire lose event
         }
     }
+
+    /****** ROOT TIP ANIMATION  *******/
+
+    private void moveTip()
+    {
+        Vector3 targetCoord;
+
+        switch (currentDirection)
+        {
+            case DIRECTION.UP:
+                targetCoord = rootTilemap.GetCellCenterWorld(currentTileCoord + new Vector3Int(0, 1, 0));
+                rootTip.transform.position = Vector3.Lerp(rootTip.transform.position, targetCoord, speed);
+                break;
+            case DIRECTION.DOWN:
+                targetCoord = rootTilemap.GetCellCenterWorld(currentTileCoord + new Vector3Int(0, -1, 0));
+                rootTip.transform.position = Vector3.Lerp(rootTip.transform.position, targetCoord, speed);
+                break;
+            case DIRECTION.LEFT:
+                targetCoord = rootTilemap.GetCellCenterWorld(currentTileCoord + new Vector3Int(-1, 0, 0));
+                rootTip.transform.position = Vector3.Lerp(rootTip.transform.position, targetCoord, speed);
+                break;
+            case DIRECTION.RIGHT:
+                targetCoord = rootTilemap.GetCellCenterWorld(currentTileCoord + new Vector3Int(1, 0, 0));
+                rootTip.transform.position = Vector3.Lerp(rootTip.transform.position, targetCoord, speed);
+                break;
+        }
+    }
+
+    /***** METHOD FOR MOVEMENT INPUT *******/
 
     private void checkForUserInput()
     {
