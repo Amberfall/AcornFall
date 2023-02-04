@@ -8,6 +8,7 @@ public class CanvasController : MonoBehaviour
     [SerializeField] TextMeshProUGUI waterRemainingText;
     [SerializeField] TextMeshProUGUI depthGaugeText;
 
+    [SerializeField] GameObject winPanel;
     public GameObject losePanel;
     [SerializeField] TextMeshProUGUI losePanelDepthText;
 
@@ -46,6 +47,14 @@ public class CanvasController : MonoBehaviour
         depthGaugeText.text = currentDepth.ToString() + " / " + depthRequiredForWin.ToString();
     }
 
+    public void OpenWinPanel()
+    {
+        winPanel.SetActive(true);
+    }
+    public void CloseWinPanel() 
+    { 
+        winPanel.SetActive(false);
+    }
     public void OpenLosePanel()
     {
         losePanel.SetActive(true);

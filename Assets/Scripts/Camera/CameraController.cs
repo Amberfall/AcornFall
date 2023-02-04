@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]float smoothTime = 1f;
     [SerializeField] int verticalOffset = 3;
+    [SerializeField] float maxSpeed = 5f;
 
     Vector3 currentVelocity;
     private void OnEnable()
@@ -18,9 +19,17 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetCoord = new Vector3(0,0,-10);
-        targetCoord.y = playerRoot.currentTileCoord.y - verticalOffset;
-        //transform.position = Vector3.Lerp(transform.position, targetCoord, Time.deltaTime);
-        transform.position = Vector3.SmoothDamp(transform.position, targetCoord, ref currentVelocity, smoothTime);
+        if(playerRoot.isActiveAndEnabled) //follow player if they are alive
+        {
+            Vector3 targetCoord = new Vector3(0, 0, -10);
+            targetCoord.y = playerRoot.currentTileCoord.y - verticalOffset;
+            transform.position = Vector3.SmoothDamp(transform.position, targetCoord, ref currentVelocity, smoothTime);
+        }
+        else //scroll back up to the top
+        {
+            Vector3 targetCoord = new Vector3(0, 5, -10);
+            transform.position = Vector3.SmoothDamp(transform.position, targetCoord, ref currentVelocity, smoothTime, maxSpeed);
+        }
+        
     }
 }

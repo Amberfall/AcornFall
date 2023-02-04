@@ -72,6 +72,8 @@ public class RootPlacement : MonoBehaviour
     public GameEvent onWaterRemainingChanged;
     public GameEvent onPlayerDied;
     public GameEvent onPlayerWon;
+    public GameEvent onDrankWaterDeposit;
+    public GameEvent onHitRock;
 
     void Start()
     {
@@ -258,13 +260,15 @@ public class RootPlacement : MonoBehaviour
         else if(ranIntoRock(tileToCheck)) 
         {
             UnityEngine.Debug.Log("OUCH... Hit a rock. You lose.");
+            onHitRock.Raise(default);
             onPlayerDied.Raise(-currentTileCoord.y);
         }
         else if(foundWater(tileToCheck)) 
         {
-            UnityEngine.Debug.Log("SLUUURP... Tasty water!");
+            waterTileMap.SetTile(tileToCheck, null);
             waterRemaining += waterGainedFromDeposit;
             onWaterRemainingChanged.Raise(waterRemaining);
+            onDrankWaterDeposit.Raise(default);
         }
     }
 
