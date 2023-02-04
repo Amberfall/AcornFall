@@ -66,6 +66,13 @@ public class RootPlacement : MonoBehaviour
     [SerializeField] int waterCostPerTile = 1;
     [SerializeField] int waterGainedFromDeposit = 25;
 
+    /**** EVENTS SYSTEM ******/
+    [Header("Events")]
+    public GameEvent onRootDepthChanged;
+    public GameEvent onWaterRemainingChanged;
+    public GameEvent onPlayerDied;
+    public GameEvent onPlayerWon;
+
     void Start()
     {
         rootTilemap.SetTile(currentTileCoord, downTipTile);
@@ -97,8 +104,10 @@ public class RootPlacement : MonoBehaviour
                     //set newest tile
                     rootTilemap.SetTile(currentTileCoord, upTipTile);
 
+                    onRootDepthChanged.Raise(-currentTileCoord.y);
+
                     //change previous tile to correct connector piece
-                    switch(prevDirection)
+                    switch (prevDirection)
                     {
                         case DIRECTION.DOWN:
                             //this shouldn't happen. you cannot go this way.
@@ -126,7 +135,9 @@ public class RootPlacement : MonoBehaviour
                     handleCollisions(currentTileCoord);
 
                     rootTilemap.SetTile(currentTileCoord, downTipTile);
-                    
+
+                    onRootDepthChanged.Raise(-currentTileCoord.y);
+
                     //change previous tile to correct connector piece
                     switch (prevDirection)
                     {
@@ -208,6 +219,7 @@ public class RootPlacement : MonoBehaviour
                     break;
             }
             waterRemaining -= waterCostPerTile;
+            onWaterRemainingChanged.Raise(waterRemaining);
             checkWaterGuage();
         }
         else
@@ -236,22 +248,23 @@ public class RootPlacement : MonoBehaviour
         if(tileToCheck.x < -10 || tileToCheck.x > 9 || tileToCheck.y > 0)
         {
             UnityEngine.Debug.Log("Out of bounds. Believe it or not, straight to jail!");
-            //TODO: fire lose event
+            onPlayerDied.Raise(default);
         }
         else if (rootAlreadyExists(tileToCheck))
         {
             UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-            //TODO: fire lose event
+            onPlayerDied.Raise(default);
         }
         else if(ranIntoRock(tileToCheck)) 
         {
             UnityEngine.Debug.Log("OUCH... Hit a rock. You lose.");
-            //TODO: fire lose event
+            onPlayerDied.Raise(default);
         }
         else if(foundWater(tileToCheck)) 
         {
             UnityEngine.Debug.Log("SLUUURP... Tasty water!");
             waterRemaining += waterGainedFromDeposit;
+            onWaterRemainingChanged.Raise(waterRemaining);
         }
     }
 
@@ -260,7 +273,7 @@ public class RootPlacement : MonoBehaviour
         if(waterRemaining <= 0)
         {
             UnityEngine.Debug.Log("sooo.. Thirsty... Can't go on... You Lose.");
-            //TODO: fire lose event
+            onPlayerDied.Raise(default);
         }
     }
 

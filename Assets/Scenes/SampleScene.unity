@@ -404,6 +404,10 @@ MonoBehaviour:
   waterRemaining: 100
   waterCostPerTile: 1
   waterGainedFromDeposit: 50
+  onRootDepthChanged: {fileID: 11400000, guid: 8cfad37bedb1f164a8f05d8ac02dfb5a, type: 2}
+  onWaterRemainingChanged: {fileID: 11400000, guid: 6eb3429d87b48cd43934fc56c756ed14, type: 2}
+  onPlayerDied: {fileID: 11400000, guid: c8bab6436a3757a4aa33b886864ccbf2, type: 2}
+  onPlayerWon: {fileID: 11400000, guid: ca981c7aed811a2468fbc4dd0e2127aa, type: 2}
 --- !u!4 &1083941718
 Transform:
   m_ObjectHideFlags: 0
@@ -428,6 +432,11 @@ Tilemap:
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 6434919705409165230, guid: 22f8c5baddf7e694788330a6307c27b3, type: 3}
   m_PrefabInstance: {fileID: 6434919703924932047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1782126952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6046149425923886144, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+  m_PrefabInstance: {fileID: 6046149424413480232}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1907134241
 GameObject:
@@ -598,6 +607,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+--- !u!114 &6046149424413480233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7186844216079854345, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+  m_PrefabInstance: {fileID: 6046149424413480232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782126952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c1c35813e8237449998695a8d05e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6046149424413480234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782126952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6eb3429d87b48cd43934fc56c756ed14, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6046149424413480233}
+        m_TargetAssemblyTypeName: CanvasController, Assembly-CSharp
+        m_MethodName: setWaterRemainingText
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6434919703924932047
 PrefabInstance:
   m_ObjectHideFlags: 0

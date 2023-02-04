@@ -10,6 +10,7 @@ public class CanvasController : MonoBehaviour
 
     public void setWaterRemainingText(int waterRemaining)
     {
+        UnityEngine.Debug.Log("i've been called! water remaining is " + waterRemaining.ToString());
         waterRemainingText.text = waterRemaining.ToString();
     }
     public void setDepthGuageText(int currentDepth, int depthRequiredForWin)
