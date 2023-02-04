@@ -32,6 +32,7 @@ public class GameSessionController : MonoBehaviour
     }
     public void RestartLevel()
     {
+        UnityEngine.Debug.Log("restarting from game controller...");
         ResumeGame();
         SceneManager.LoadScene(currentLevel.name);
     }
