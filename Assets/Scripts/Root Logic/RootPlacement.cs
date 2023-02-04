@@ -28,6 +28,10 @@ public class RootPlacement : MonoBehaviour
     //reference to the root tilemap
     [SerializeField] private Tilemap rootTilemap;
 
+    //references to the rock and water tilemaps for collision checks
+    [SerializeField] private Tilemap rockTileMap;
+    [SerializeField] private Tilemap waterTileMap;
+
     
     /*****  MOVEMENT VARIABLES  ******/
     
@@ -53,7 +57,11 @@ public class RootPlacement : MonoBehaviour
         LEFT,
         RIGHT
     }
-    
+
+    /***** WATER GUAGE *****/
+    [SerializeField] int waterRemaining = 100;
+    [SerializeField] int waterCostPerTile = 1;
+    [SerializeField] int waterGainedFromDeposit = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -65,38 +73,8 @@ public class RootPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            if(prevDirection != DIRECTION.DOWN)
-            {
-                currentDirection = DIRECTION.UP;
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-        {
-            if(prevDirection != DIRECTION.UP)
-            {
-                currentDirection = DIRECTION.DOWN;
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-        {
-            if(prevDirection != DIRECTION.RIGHT)
-            {
-                currentDirection = DIRECTION.LEFT;
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.D))
-        {
-            if(prevDirection != DIRECTION.LEFT)
-            {
-                currentDirection = DIRECTION.RIGHT;
-            }
-            
-        }
-
+        checkForUserInput();
         Move();
-        
     }
 
     private void Move()
@@ -110,11 +88,8 @@ public class RootPlacement : MonoBehaviour
                 case DIRECTION.UP:
                     
                     currentTileCoord += new Vector3Int(0, 1, 0);
-                    if(rootAlreadyExists(currentTileCoord))
-                    {
-                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-                        //TODO: fire lose event
-                    }
+                    
+                    handleCollisions(currentTileCoord);
 
                     //set newest tile
                     rootTilemap.SetTile(currentTileCoord, upTipTile);
@@ -145,11 +120,7 @@ public class RootPlacement : MonoBehaviour
 
                     currentTileCoord += new Vector3Int(0, -1, 0);
 
-                    if (rootAlreadyExists(currentTileCoord))
-                    {
-                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-                        //TODO: fire lose event
-                    }
+                    handleCollisions(currentTileCoord);
 
                     rootTilemap.SetTile(currentTileCoord, downTipTile);
                     
@@ -178,11 +149,7 @@ public class RootPlacement : MonoBehaviour
 
                     currentTileCoord += new Vector3Int(-1, 0, 0);
 
-                    if (rootAlreadyExists(currentTileCoord))
-                    {
-                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-                        //TODO: fire lose event
-                    }
+                    handleCollisions(currentTileCoord);
 
                     rootTilemap.SetTile(currentTileCoord, leftTipTile);
 
@@ -211,11 +178,7 @@ public class RootPlacement : MonoBehaviour
 
                     currentTileCoord += new Vector3Int(1, 0, 0);
 
-                    if (rootAlreadyExists(currentTileCoord))
-                    {
-                        UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-                        //TODO: fire lose event
-                    }
+                    handleCollisions(currentTileCoord);
 
                     rootTilemap.SetTile(currentTileCoord, rightTipTile);
 
@@ -241,6 +204,8 @@ public class RootPlacement : MonoBehaviour
                     prevDirection = currentDirection;
                     break;
             }
+            waterRemaining -= waterCostPerTile;
+            checkWaterGuage();
         }
         else
         {
@@ -251,5 +216,73 @@ public class RootPlacement : MonoBehaviour
     private bool rootAlreadyExists(Vector3Int tileToCheck)
     {
         return rootTilemap.GetTile(tileToCheck) != null;
+    }
+    private bool ranIntoRock(Vector3Int tileToCheck)
+    {
+        return rockTileMap.GetTile(tileToCheck) != null;
+    }
+    private bool foundWater(Vector3Int tileToCheck)
+    {
+        return waterTileMap.GetTile(tileToCheck) != null;
+    }
+    private void handleCollisions(Vector3Int tileToCheck)
+    {
+        if (rootAlreadyExists(tileToCheck))
+        {
+            UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
+            //TODO: fire lose event
+        }
+        else if(ranIntoRock(tileToCheck)) 
+        {
+            UnityEngine.Debug.Log("OUCH... Hit a rock. You lose.");
+            //TODO: fire lose event
+        }
+        else if(foundWater(tileToCheck)) 
+        {
+            UnityEngine.Debug.Log("SLUUURP... Tasty water!");
+            //TODO: increase water guage
+        }
+    }
+
+    private void checkWaterGuage()
+    {
+        if(waterRemaining <= 0)
+        {
+            UnityEngine.Debug.Log("sooo.. Thirsty... Can't go on... You Lose.");
+            //TODO: fire lose event
+        }
+    }
+
+    private void checkForUserInput()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            if (prevDirection != DIRECTION.DOWN)
+            {
+                currentDirection = DIRECTION.UP;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            if (prevDirection != DIRECTION.UP)
+            {
+                currentDirection = DIRECTION.DOWN;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            if (prevDirection != DIRECTION.RIGHT)
+            {
+                currentDirection = DIRECTION.LEFT;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            if (prevDirection != DIRECTION.LEFT)
+            {
+                currentDirection = DIRECTION.RIGHT;
+            }
+
+        }
     }
 }

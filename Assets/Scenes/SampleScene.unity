@@ -64388,7 +64388,12 @@ MonoBehaviour:
   upTipTile: {fileID: 11400000, guid: dfa8a2b2beb140049b5aa464d402bab8, type: 2}
   downTipTile: {fileID: 11400000, guid: 024c5f6408b503d47bda67d39696551c, type: 2}
   rootTilemap: {fileID: 314432009}
+  rockTileMap: {fileID: 1502112353}
+  waterTileMap: {fileID: 1183659727}
   speed: 0.5
+  waterRemaining: 100
+  waterCostPerTile: 1
+  waterGainedFromDeposit: 25
 --- !u!4 &1083941718
 Transform:
   m_ObjectHideFlags: 0
