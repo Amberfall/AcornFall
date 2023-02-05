@@ -44,6 +44,14 @@ public class GameSessionController : MonoBehaviour
         ResumeGame();
         SceneManager.LoadScene(currentLevel.name);
     }
+    public void PlayNextLevel()
+    {
+        SceneManager.LoadScene(currentLevel.buildIndex + 1);
+    }
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void LoseGame()
     {
         //TODO: animate withering root, wait a moment, then do the rest of this logic
