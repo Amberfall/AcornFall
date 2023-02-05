@@ -21,6 +21,8 @@ public class TitleController : MonoBehaviour
     public CanvasGroup FullScreenImage;
     public CanvasGroup UIGroup;
 
+    public GameObject Acorn;
+
     public AudioSource ButtonMouseOverSource;
     public AudioSource ButtonMouseClickSource;
 
@@ -124,7 +126,8 @@ public class TitleController : MonoBehaviour
 
         var sequence = DOTween.Sequence();
 
-        sequence.Append(Camera.main.transform.DOMove(new Vector3(5, -5, -10), 2f));
+        sequence.Append(Camera.main.transform.DOMove(new Vector3(6, -5, -10), 2f));
+        sequence.Insert(0.1f, Acorn.transform.DOMoveY(-4, 1f).SetEase(Ease.InQuad));
         sequence.Insert(0.1f, MusicSource.DOFade(0f, 2f));
         sequence.Insert(0.1f, UIGroup.DOFade(0, 0.5f));
         sequence.Append(Camera.main.DOOrthoSize(1, 2f));
@@ -133,7 +136,7 @@ public class TitleController : MonoBehaviour
 
         sequence.OnComplete(() =>
         {
-            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("EasyLevel", LoadSceneMode.Single);
         });
     }
 

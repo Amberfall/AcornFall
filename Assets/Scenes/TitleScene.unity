@@ -1142,13 +1142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430582ec14741f40810584b187c51e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditorCreateOurOwnHost: 0
+  EditorCreateOurOwnHost: 1
   LoadingTM: {fileID: 779244632}
   ConnectionFailedTM: {fileID: 1426129294}
   MusicSource: {fileID: 90482929}
   ButtonsGroup: {fileID: 1629638946}
   FullScreenImage: {fileID: 657141620}
   UIGroup: {fileID: 1332395328}
+  Acorn: {fileID: 729972259}
   ButtonMouseOverSource: {fileID: 1552839504}
   ButtonMouseClickSource: {fileID: 306780212}
 --- !u!4 &330849464

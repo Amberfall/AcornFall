@@ -11,7 +11,7 @@ public class ServerNetworking : NetworkBehaviour
 {
     private int _fails = 0;
     private int _wins = 0;
-    private List<Vector2Int> _bonuses = new List<Vector2Int>();
+    private List<Vector3Int> _bonuses = new List<Vector3Int>();
 
     private readonly NetworkVariable<ServerData> _serverDataNetworkVar =
         new NetworkVariable<ServerData>();
@@ -19,7 +19,7 @@ public class ServerNetworking : NetworkBehaviour
 
     public int Fails { get => _fails; private set => _fails = value; }
     public int Wins { get => _wins; private set => _wins = value; }
-    public List<Vector2Int> Bonuses { get => _bonuses; private set => _bonuses = value; }
+    public List<Vector3Int> Bonuses { get => _bonuses; private set => _bonuses = value; }
     public ServerData ServerData { get => _serverDataNetworkVar.Value; }
 
     public override void OnNetworkSpawn()
@@ -61,12 +61,12 @@ public class ServerNetworking : NetworkBehaviour
         ClientRecordWinServerRPC();
     }
 
-    public void RecordLoss(Vector2Int locOfDeath)
+    public void RecordLoss(Vector3Int locOfDeath)
     {
         ClientRecordFailServerRPC(locOfDeath);
     }
 
-    public void ConsumeBonus(Vector2Int loc)
+    public void ConsumeBonus(Vector3Int loc)
     {
         ClientConsumeBonusServerRPC(loc);
     }
@@ -79,7 +79,7 @@ public class ServerNetworking : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ClientRecordFailServerRPC(Vector2Int loc)
+    private void ClientRecordFailServerRPC(Vector3Int loc)
     {
         Fails++;
 
@@ -92,7 +92,7 @@ public class ServerNetworking : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ClientConsumeBonusServerRPC(Vector2Int loc)
+    private void ClientConsumeBonusServerRPC(Vector3Int loc)
     {
         if (_bonuses.Contains(loc))
         {
@@ -128,9 +128,9 @@ public struct ServerData : INetworkSerializable
 {
     public int Fails;
     public int Wins;
-    public Vector2Int[] Bonuses;
+    public Vector3Int[] Bonuses;
 
-    public ServerData(List<Vector2Int> bonusList)
+    public ServerData(List<Vector3Int> bonusList)
     {
         Fails = 0;
         Wins = 0;
@@ -144,7 +144,7 @@ public struct ServerData : INetworkSerializable
         serializer.SerializeValue(ref Wins);
 
         if (Bonuses == null)
-            Bonuses = new Vector2Int[0] { };
+            Bonuses = new Vector3Int[0] { };
 
         serializer.SerializeValue(ref Bonuses);
     }
