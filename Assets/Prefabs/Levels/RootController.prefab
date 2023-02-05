@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &92779250097187404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92779250097187406}
+  - component: {fileID: 92779250097187405}
+  - component: {fileID: 92779250097187407}
+  m_Layer: 0
+  m_Name: RootController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &92779250097187406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92779250097187404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92779250097187405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92779250097187404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9018111181bf843ac59c0c66836819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalConnectorTile: {fileID: 11400000, guid: 60e71750237be9b429a377ce28550a18, type: 2}
+  horizonalConnectorTile: {fileID: 11400000, guid: 715e823a666419c42a12d66a96ff8c0a, type: 2}
+  leftDownConnectorTile: {fileID: 11400000, guid: 05bfef9a12b987f4d81613e6a6cadb15, type: 2}
+  leftUpConnectorTile: {fileID: 11400000, guid: 86e3b04693cf0314a8350c0d5f94688a, type: 2}
+  rightUpConnectorTile: {fileID: 11400000, guid: 42f686693209ec248bac421c30c11522, type: 2}
+  rightDownConnectorTile: {fileID: 11400000, guid: 3cb0ccde4ce63ae45b3ccd5914d3a992, type: 2}
+  leftTipTile: {fileID: 11400000, guid: 488152184753e004dba0df609ad7e7ac, type: 2}
+  rightTipTile: {fileID: 11400000, guid: 98f8b7a5610de384e8b876fede69128b, type: 2}
+  upTipTile: {fileID: 11400000, guid: dfa8a2b2beb140049b5aa464d402bab8, type: 2}
+  downTipTile: {fileID: 11400000, guid: 024c5f6408b503d47bda67d39696551c, type: 2}
+  rootTilemap: {fileID: 0}
+  rockTileMap: {fileID: 0}
+  waterTileMap: {fileID: 0}
+  rootTip: {fileID: 0}
+  currentTileCoord: {x: 0, y: 0, z: 0}
+  speed: 0.1
+  maxSpeed: 0.1
+  minSpeed: 0.25
+  timeToReachMaxSpeed: 8
+  waterRemaining: 100
+  waterCostPerTile: 1
+  waterGainedFromDeposit: 50
+  onRootDepthChanged: {fileID: 11400000, guid: 8cfad37bedb1f164a8f05d8ac02dfb5a, type: 2}
+  onWaterRemainingChanged: {fileID: 11400000, guid: 6eb3429d87b48cd43934fc56c756ed14, type: 2}
+  onPlayerDied: {fileID: 11400000, guid: c8bab6436a3757a4aa33b886864ccbf2, type: 2}
+  onPlayerWon: {fileID: 11400000, guid: ca981c7aed811a2468fbc4dd0e2127aa, type: 2}
+  onDrankWaterDeposit: {fileID: 11400000, guid: 064df41920222f14fbe0ca81ce1a96b9, type: 2}
+  onHitRock: {fileID: 11400000, guid: be26431a5d2b29049b72d262e6199b60, type: 2}
+--- !u!114 &92779250097187407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92779250097187404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: ca981c7aed811a2468fbc4dd0e2127aa, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 92779250097187405}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
