@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5070536134542740151}
   - component: {fileID: 5070536134542740150}
-  - component: {fileID: 7076837525670347128}
   - component: {fileID: -1850867081652800918}
   m_Layer: 0
   m_Name: NetworkManagerPrefab
@@ -78,19 +77,6 @@ MonoBehaviour:
     LoadSceneTimeOut: 120
     SpawnTimeout: 1
     EnableNetworkLogs: 1
---- !u!114 &7076837525670347128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5070536134542740148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cc2e81fddf8884ba3d2a7d14ac31cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EditorCreateOurOwnHost: 0
 --- !u!114 &-1850867081652800918
 MonoBehaviour:
   m_ObjectHideFlags: 0
