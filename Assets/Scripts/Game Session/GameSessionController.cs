@@ -58,6 +58,7 @@ public class GameSessionController : MonoBehaviour
     }
     public void ReturnToMenu()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }
     public void LoseGame()
