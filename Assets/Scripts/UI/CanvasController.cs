@@ -18,6 +18,7 @@ public class CanvasController : MonoBehaviour
     public GameEvent pauseGame;
     public GameEvent resumeGame;
     public GameEvent restartLevel;
+    public GameEvent playNextLevel;
 
     private void Update()
     {
@@ -28,7 +29,10 @@ public class CanvasController : MonoBehaviour
                 UnityEngine.Debug.Log("restarting game...");
                 restartLevel.Raise(default);
             }
-            //else if(pauseMenu.activeSelf)
+            else if(winPanel.activeSelf) 
+            { 
+                playNextLevel.Raise(default);
+            }
         }
     }
 

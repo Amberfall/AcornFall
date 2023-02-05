@@ -46,7 +46,15 @@ public class GameSessionController : MonoBehaviour
     }
     public void PlayNextLevel()
     {
-        SceneManager.LoadScene(currentLevel.buildIndex + 1);
+        if(currentLevel.buildIndex < 3)
+        {
+            SceneManager.LoadScene(currentLevel.buildIndex + 1);
+        }
+        else
+        {
+            RestartLevel();
+        }
+        
     }
     public void ReturnToMenu()
     {
@@ -71,7 +79,7 @@ public class GameSessionController : MonoBehaviour
     {
         if(serverNetworking!= null)
         {
-            serverNetworking.RecordWin();
+            serverNetworking.RecordWin(currentLevel.buildIndex);
         }
         
     }
@@ -98,10 +106,11 @@ public class GameSessionController : MonoBehaviour
     {
         if (serverNetworking != null)
         {
-            Vector2Int lossCoordinate = new Vector2Int();
+            Vector3Int lossCoordinate = new Vector3Int();
             lossCoordinate.x = coordinate.x; 
             lossCoordinate.y = coordinate.y;
             int sceneNumber = currentLevel.buildIndex;
+            lossCoordinate.z = sceneNumber;
             serverNetworking.RecordLoss(lossCoordinate);
         }
     }

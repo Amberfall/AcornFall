@@ -2049,6 +2049,7 @@ MonoBehaviour:
   pauseGame: {fileID: 11400000, guid: 071dae1a23bd3d14893276613497302f, type: 2}
   resumeGame: {fileID: 11400000, guid: aaeee2da305d36a48a179d85b3f8ae02, type: 2}
   restartLevel: {fileID: 11400000, guid: 7d1aea3fd794f9645830a12fa201ceaf, type: 2}
+  playNextLevel: {fileID: 11400000, guid: 69972ee40ea0c4647ab914824f038bc2, type: 2}
 --- !u!114 &6046149424413480234
 MonoBehaviour:
   m_ObjectHideFlags: 0
