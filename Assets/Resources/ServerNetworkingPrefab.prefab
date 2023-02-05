@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8737369901504861313}
   - component: {fileID: 8737369901504861314}
   m_Layer: 0
-  m_Name: ServerDataPrefab
+  m_Name: ServerNetworkingPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

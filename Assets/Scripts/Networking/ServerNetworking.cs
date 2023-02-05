@@ -44,7 +44,7 @@ public class ServerNetworking : NetworkBehaviour
             if (tc != null)
                 tc.OnServerConnected();
         }
-        else
+        else if (IsServer)
         {
             WriteState();
         }
@@ -145,6 +145,24 @@ public class ServerNetworking : NetworkBehaviour
         Bonuses.AddRange(_serverDataNetworkVar.Value.Bonuses);
     }
 
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Bootstrap()
+    {
+        var serverNetworking = FindObjectOfType<ServerNetworking>();
+        if (serverNetworking == null)
+        {
+            var newObj = UnityEngine.Object.Instantiate(Resources.Load("ServerNetworkingPrefab"));
+        }
+
+        var networkManager = FindObjectOfType<NetworkManager>();
+        if (networkManager == null)
+        {
+            var newObj = UnityEngine.Object.Instantiate(Resources.Load("NetworkManagerPrefab"));
+        }
+        
+       
+    }
 }
 
 public struct ServerData : INetworkSerializable
@@ -177,6 +195,5 @@ public struct ServerData : INetworkSerializable
 
         serializer.SerializeValue(ref Bonuses);
     }
-
 
 }

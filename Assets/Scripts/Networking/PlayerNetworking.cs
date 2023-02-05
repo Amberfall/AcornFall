@@ -8,5 +8,8 @@ using Unity.Netcode;
 /// </summary>
 public class PlayerNetworking : NetworkBehaviour
 {
-
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }
