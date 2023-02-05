@@ -60,8 +60,8 @@ MonoBehaviour:
   waterTileMap: {fileID: 0}
   rootTip: {fileID: 0}
   currentTileCoord: {x: 0, y: 0, z: 0}
-  speed: 0.1
-  maxSpeed: 0.1
+  speed: 0.12
+  maxSpeed: 0.12
   minSpeed: 0.25
   timeToReachMaxSpeed: 8
   waterRemaining: 100

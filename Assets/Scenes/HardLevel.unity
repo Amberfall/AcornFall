@@ -644,8 +644,8 @@ MonoBehaviour:
   waterTileMap: {fileID: 974818564}
   rootTip: {fileID: 569238684}
   currentTileCoord: {x: 0, y: 0, z: 0}
-  speed: 0.1
-  maxSpeed: 0.1
+  speed: 0.11
+  maxSpeed: 0.11
   minSpeed: 0.25
   timeToReachMaxSpeed: 8
   waterRemaining: 100
@@ -1557,7 +1557,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 408781135, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 608952097, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1589,7 +1589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 676806854, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1205160816, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1754,11 +1754,11 @@ PrefabInstance:
     - target: {fileID: 7186844216079854345, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: winPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6046149424413480236}
     - target: {fileID: 7186844216079854345, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: losePanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6046149424413480235}
     - target: {fileID: 7186844216079854345, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: pauseGame
       value: 
@@ -1774,7 +1774,7 @@ PrefabInstance:
     - target: {fileID: 7186844216079854345, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
       propertyPath: losePanelDepthText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6046149424413480234}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
 --- !u!114 &6046149424413480233 stripped
@@ -1788,6 +1788,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c1c35813e8237449998695a8d05e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6046149424413480234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 396011971, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+  m_PrefabInstance: {fileID: 6046149424413480232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6046149424413480235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 676806853, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+  m_PrefabInstance: {fileID: 6046149424413480232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6046149424413480236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 408781134, guid: 0ee9ea8b4dcaef447ab99c1e1473c93a, type: 3}
+  m_PrefabInstance: {fileID: 6046149424413480232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6046149424413480239
 MonoBehaviour:
   m_ObjectHideFlags: 0
