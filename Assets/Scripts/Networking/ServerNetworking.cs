@@ -64,6 +64,24 @@ public class ServerNetworking : NetworkBehaviour
         Bonuses.AddRange(_serverDataNetworkVar.Value.Bonuses);
     }
 
+    [ContextMenu("Fake Win Easy")]
+    private void FakeWin1()
+    {
+        RecordWin(1);
+    }
+
+    [ContextMenu("Fake Win Medium")]
+    private void FakeWin2()
+    {
+        RecordWin(2);
+    }
+
+    [ContextMenu("Fake Win Hard")]
+    private void FakeWin3()
+    {
+        RecordWin(3);
+    }
+
     public void RecordWin(int difficulty)
     {
         ClientRecordWinServerRPC(difficulty);
@@ -85,14 +103,17 @@ public class ServerNetworking : NetworkBehaviour
         if (difficulty == 1)
         {
             Wins1++;
+            Debug.Log($"Adding win at difficulty: {difficulty}");
         }
         else if (difficulty == 2)
         {
             Wins2++;
+            Debug.Log($"Adding win at difficulty: {difficulty}");
         }
         else
         {
             Wins3++;
+            Debug.Log($"Adding win at difficulty: {difficulty}");
         }
         
         WriteState();
@@ -105,6 +126,7 @@ public class ServerNetworking : NetworkBehaviour
 
         if (_bonuses.Contains(loc) == false && _bonuses.Count < 100)
         {
+            Debug.Log($"Adding bonus at {loc}");
             _bonuses.Add(loc);
         }
 
@@ -116,6 +138,7 @@ public class ServerNetworking : NetworkBehaviour
     {
         if (_bonuses.Contains(loc))
         {
+            Debug.Log($"Consuming bonus at {loc}");
             _bonuses.Remove(loc);
             WriteState();
         }

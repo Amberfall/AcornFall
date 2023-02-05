@@ -18,6 +18,7 @@ public class TitleController : MonoBehaviour
     public TextMeshProUGUI LoadingTM;
     public TextMeshProUGUI ConnectionFailedTM;
     public TextMeshProUGUI WinCounterTM;
+    public TextMeshProUGUI LoseCounterTM;
     public AudioSource MusicSource;
     public CanvasGroup ButtonsGroup;
     public CanvasGroup FullScreenImage;
@@ -178,11 +179,14 @@ public class TitleController : MonoBehaviour
                 TreePrefab,
                 new Vector3(Random.Range(-11, 11), 0, 0),
                 Quaternion.identity);
-            newTree.MaxSize = 1;
+            newTree.MaxSize = 2;
         }
 
         WinCounterTM.text = $"Players before you have grown {sn.Wins1 + sn.Wins2 + sn.Wins3} trees!";
         WinCounterTM.DOFade(1f, 0.25f);
+
+        LoseCounterTM.text = $"But {sn.Fails} acorns have failed to sprout.";
+        LoseCounterTM.DOFade(1f, 0.25f);
 
     }
 
