@@ -7,6 +7,7 @@ public class GameSessionController : MonoBehaviour
 {
     [SerializeField] private int depthRequiredToWin;
 
+
     [Header("Events")]
     public GameEvent playerWon;
 
@@ -14,11 +15,13 @@ public class GameSessionController : MonoBehaviour
     private AudioController audioController;
 
     private Scene currentLevel;
+    private ServerNetworking serverNetworking;
 
     private void OnEnable()
     {
         canvasController = FindObjectOfType<CanvasController>();
         audioController = FindObjectOfType<AudioController>();
+        serverNetworking = FindObjectOfType<ServerNetworking>();
     }
 
     private void Start()
@@ -41,9 +44,18 @@ public class GameSessionController : MonoBehaviour
         ResumeGame();
         SceneManager.LoadScene(currentLevel.name);
     }
+    public void PlayNextLevel()
+    {
+        SceneManager.LoadScene(currentLevel.buildIndex + 1);
+    }
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void LoseGame()
     {
         //TODO: animate withering root, wait a moment, then do the rest of this logic
+        
         StartCoroutine(DeathSequence());
     }
 
@@ -57,7 +69,11 @@ public class GameSessionController : MonoBehaviour
     }
     public void WinGame()
     {
-
+        if(serverNetworking!= null)
+        {
+            serverNetworking.RecordWin();
+        }
+        
     }
 
     IEnumerator DeathSequence()
@@ -75,6 +91,18 @@ public class GameSessionController : MonoBehaviour
         if(audioController != null) 
         {
             audioController.PlayShrivelSound();
+        }
+    }
+
+    public void RecordLoseCoord(Vector3Int coordinate)
+    {
+        if (serverNetworking != null)
+        {
+            Vector2Int lossCoordinate = new Vector2Int();
+            lossCoordinate.x = coordinate.x; 
+            lossCoordinate.y = coordinate.y;
+            int sceneNumber = currentLevel.buildIndex;
+            serverNetworking.RecordLoss(lossCoordinate);
         }
     }
 

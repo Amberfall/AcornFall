@@ -80,6 +80,13 @@ public class RootPlacement : MonoBehaviour
     public GameEvent onDrankWaterDeposit;
     public GameEvent onHitRock;
 
+    private GameSessionController gameSessionController;
+
+    private void OnEnable()
+    {
+        gameSessionController = FindObjectOfType<GameSessionController>();
+    }
+
     void Start()
     {
         speed = minSpeed;
@@ -318,6 +325,12 @@ public class RootPlacement : MonoBehaviour
             onPlayerDied.Raise(-currentTileCoord.y);
         }
         
+    }
+
+    private void HandlePlayerDeath()
+    {
+        onPlayerDied.Raise(-currentTileCoord.y);
+        gameSessionController.RecordLoseCoord(prevTileCoord);
     }
 
     /****** ROOT TIP ANIMATION  *******/
