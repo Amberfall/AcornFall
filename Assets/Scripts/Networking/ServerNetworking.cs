@@ -103,7 +103,7 @@ public class ServerNetworking : NetworkBehaviour
     {
         Fails++;
 
-        if (_bonuses.Contains(loc) == false)
+        if (_bonuses.Contains(loc) == false && _bonuses.Count < 100)
         {
             _bonuses.Add(loc);
         }

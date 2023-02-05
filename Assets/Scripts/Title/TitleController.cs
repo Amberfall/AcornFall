@@ -98,7 +98,7 @@ public class TitleController : MonoBehaviour
 
     public IEnumerator CheckForConnection()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
 
         if (NetworkManager.Singleton.IsServer)
         {
@@ -110,12 +110,12 @@ public class TitleController : MonoBehaviour
         }
         else
         {
-            // couldn't connect, continue on
-            Debug.LogWarning("Couldn't connect to server, gonna do our own thing");
+            // couldn't connect
+            Debug.LogWarning("Couldn't connect to server domain, trying IP");
             NetworkManager.Singleton.Shutdown(false);
-
             ConnectionFailedTM.DOFade(1f, 0.5f);
             PlayIntroAnimation();
+            
         }
     }
 
