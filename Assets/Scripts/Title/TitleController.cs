@@ -9,6 +9,7 @@ using TMPro;
 using Unity.Netcode;
 using Netcode.Transports.WebSocket;
 using System;
+using Random = UnityEngine.Random;
 
 public class TitleController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class TitleController : MonoBehaviour
 
     public TextMeshProUGUI LoadingTM;
     public TextMeshProUGUI ConnectionFailedTM;
+    public TextMeshProUGUI WinCounterTM;
     public AudioSource MusicSource;
     public CanvasGroup ButtonsGroup;
     public CanvasGroup FullScreenImage;
@@ -25,6 +27,8 @@ public class TitleController : MonoBehaviour
 
     public AudioSource ButtonMouseOverSource;
     public AudioSource ButtonMouseClickSource;
+
+    public List<GameObject> TreePrefabs;
 
     private void Awake()
     {
@@ -56,6 +60,7 @@ public class TitleController : MonoBehaviour
             var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
             transport.ConnectAddress = "ggj.skipsabeatmusic.com";
             NetworkManager.Singleton.StartClient();
+            
             StartCoroutine(CheckForConnection());
         }
 #elif UNITY_SERVER
@@ -118,6 +123,33 @@ public class TitleController : MonoBehaviour
 
         ButtonsGroup.DOFade(1f, 0.5f);
         ButtonsGroup.interactable = true;
+
+        StartCoroutine(SpawnTrees());
+    }
+
+    IEnumerator SpawnTrees()
+    {
+        var sn = FindObjectOfType<ServerNetworking>();
+        float minTime = 0.5f;
+        int numTrees = Mathf.Min(sn.Wins, 50);
+        for (int i = 0; i < numTrees; i++)
+        {
+            yield return new WaitForSeconds(minTime + Random.Range(minTime, 0.2f));
+
+            minTime = Mathf.Max(0.1f, minTime - 0.05f);
+
+
+            int prefabIndex = Mathf.FloorToInt(Random.Range(0, TreePrefabs.Count - 1));
+
+            Instantiate(
+                TreePrefabs[prefabIndex], 
+                new Vector3(Random.Range(-11, 11), 0, 0), 
+                Quaternion.identity);
+        }
+
+        WinCounterTM.text = $"Players have grown {sn.Wins} trees!";
+        WinCounterTM.DOFade(1f, 0.25f);
+
     }
 
     public void PlayChangeToGameScene()

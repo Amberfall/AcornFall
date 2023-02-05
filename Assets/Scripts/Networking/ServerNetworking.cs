@@ -10,7 +10,7 @@ using System;
 public class ServerNetworking : NetworkBehaviour
 {
     private int _fails = 0;
-    private int _wins = 0;
+    private int _wins = 4;
     private List<Vector3Int> _bonuses = new List<Vector3Int>();
 
     private readonly NetworkVariable<ServerData> _serverDataNetworkVar =
