@@ -386,6 +386,83 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 6434919704889281280, guid: 6c90ba3127adaf447abde327f67c73d9, type: 3}
   m_PrefabInstance: {fileID: 24330811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1349160696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 662979165837221867, guid: b3dde3e1a6f78604c9df9f8dd015971d, type: 3}
+  m_PrefabInstance: {fileID: 662979164920282280}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1349160704 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 662979165837221868, guid: b3dde3e1a6f78604c9df9f8dd015971d, type: 3}
+  m_PrefabInstance: {fileID: 662979164920282280}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1349160705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 662979165837221859, guid: b3dde3e1a6f78604c9df9f8dd015971d, type: 3}
+  m_PrefabInstance: {fileID: 662979164920282280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349160696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb385717b511e6c4ea4cd2cdcb30a223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1349160707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349160696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c8bab6436a3757a4aa33b886864ccbf2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1349160705}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: lowerBGM
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1349160708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349160696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: ca981c7aed811a2468fbc4dd0e2127aa, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1349160705}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: lowerBGM
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1839735485 &1423695610 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 6434919704152156102, guid: 6c90ba3127adaf447abde327f67c73d9, type: 3}
@@ -539,6 +616,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 662979165837221859, guid: b3dde3e1a6f78604c9df9f8dd015971d, type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 1349160704}
     - target: {fileID: 662979165837221867, guid: b3dde3e1a6f78604c9df9f8dd015971d, type: 3}
       propertyPath: m_Name
       value: AudioPlayer
