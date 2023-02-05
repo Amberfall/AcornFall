@@ -12,6 +12,16 @@ EditorBuildSettings:
     path: Assets/Scenes/EasyLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Scenes/HardLevel.unity
+=======
+    path: Assets/Scenes/MediumLevel.unity
+<<<<<<< HEAD
+=======
+    guid: 57ca8f547abea2948a5a2bce46c019f8
+  - enabled: 1
+    path: Assets/Scenes/HardLevel.unity
+>>>>>>> 9a53231d13371ada4b3486e2686247c44ad1a958
+>>>>>>> Stashed changes
     guid: 51ef92dcc61623c48adebade3de06808
   m_configObjects: {}
