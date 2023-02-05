@@ -56,7 +56,7 @@ public class ServerNetworking : NetworkBehaviour
         Bonuses.AddRange(_serverDataNetworkVar.Value.Bonuses);
     }
 
-    public void RecordWin()
+    public void RecordWin(int difficulty)
     {
         ClientRecordWinServerRPC();
     }
