@@ -10,6 +10,7 @@ public class GameSessionController : MonoBehaviour
 
     [Header("Events")]
     public GameEvent playerWon;
+    public GameEvent receivedNetworkingData;
 
     private CanvasController canvasController;
     private AudioController audioController;
@@ -28,6 +29,8 @@ public class GameSessionController : MonoBehaviour
     {
         canvasController.setDepthRequiredForWin(depthRequiredToWin);
         currentLevel = SceneManager.GetActiveScene();
+        SendCoordListForWaterDrops();
+        //SendCoordListForWaterDropsTest();
     }
 
     public void PauseGame()
@@ -114,6 +117,43 @@ public class GameSessionController : MonoBehaviour
             lossCoordinate.z = sceneNumber;
             serverNetworking.RecordLoss(lossCoordinate);
         }
+    }
+
+    private void SendCoordListForWaterDrops()
+    {
+        if(serverNetworking != null) 
+        {
+            List<Vector3Int> coordList = new List<Vector3Int>();
+
+            coordList = serverNetworking.Bonuses;
+
+            List<Vector3Int> thisLevelCoordList = new List<Vector3Int>();
+
+            foreach(Vector3Int coord in coordList) 
+            { 
+                if(coord.z == currentLevel.buildIndex)
+                {
+                    thisLevelCoordList.Add(coord);
+                }
+            }
+
+            receivedNetworkingData.Raise(thisLevelCoordList);
+        }
+        
+
+    }
+    
+    //SendCoordListForWaterDrops Test
+    private void SendCoordListForWaterDropsTest()
+    {
+        List<Vector3Int> testCoordList = new List<Vector3Int>();
+
+        for(int i = 0; i < 10; i++)
+        {
+            Vector3Int testCoord = new Vector3Int(-i,-i,-i);
+            testCoordList.Add(testCoord);
+        }
+        receivedNetworkingData.Raise(testCoordList);
     }
 
 }

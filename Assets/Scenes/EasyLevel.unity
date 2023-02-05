@@ -727,6 +727,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9164d46b802d6644884186a63d413b7f, type: 3}
+--- !u!1001 &2991179442938544952
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236835119057417745, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716278495620275004, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: waterTileMap
+      value: 
+      objectReference: {fileID: 1022893468}
+    - target: {fileID: 8467941658876659128, guid: 469868f102fa15343991050b09ff1386, type: 3}
+      propertyPath: m_Name
+      value: NetworkWaterDropsPlacer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 469868f102fa15343991050b09ff1386, type: 3}
 --- !u!1001 &3408241075439396082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1023,6 +1084,10 @@ PrefabInstance:
       propertyPath: depthRequiredToWin
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 6974752231887129546, guid: 02df384c08f855b4cbadae4ba7b56ceb, type: 3}
+      propertyPath: receivedNetworkingData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f6dc241835cf224c9dd552cd7b5a23e, type: 2}
     - target: {fileID: 6974752231887129547, guid: 02df384c08f855b4cbadae4ba7b56ceb, type: 3}
       propertyPath: m_Name
       value: GameSessionController
