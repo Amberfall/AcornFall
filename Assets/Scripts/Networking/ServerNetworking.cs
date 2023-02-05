@@ -40,6 +40,7 @@ public class ServerNetworking : NetworkBehaviour
         }
         else if (IsHost)
         {
+            WriteState();
             var tc = FindObjectOfType<TitleController>();
             if (tc != null)
                 tc.OnServerConnected();
