@@ -51,6 +51,8 @@ public class RootPlacement : MonoBehaviour
     public float timeToReachMaxSpeed = 5f;
     private float timeUntilMovement;
 
+    Coroutine speedUpRoutine;
+
     DIRECTION currentDirection = DIRECTION.DOWN;
     DIRECTION prevDirection = DIRECTION.DOWN;
 
@@ -80,10 +82,11 @@ public class RootPlacement : MonoBehaviour
 
     void Start()
     {
+        speed = minSpeed;
         rootTilemap.SetTile(currentTileCoord, downTipTile);
         timeUntilMovement = speed;
         rootTip.transform.position = rootTilemap.GetCellCenterWorld(currentTileCoord);
-        StartCoroutine(RampUpSpeedOnStart());
+        speedUpRoutine =  StartCoroutine(RampUpSpeed());
     }
 
     void Update()
@@ -245,19 +248,23 @@ public class RootPlacement : MonoBehaviour
 
             speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime / timeToReachMaxSpeed);
         }
+        else if (speed != maxSpeed && speedUpRoutine == null)
+        {
+            speedUpRoutine = StartCoroutine(RampUpSpeed());
+        }
 
     }
 
-    IEnumerator RampUpSpeedOnStart()
+    IEnumerator RampUpSpeed()
     {
-        speed = minSpeed;
         do
         {
             UnityEngine.Debug.Log("modifying the speed...");
             speed = Mathf.MoveTowards(speed, maxSpeed, Time.deltaTime / (timeToReachMaxSpeed * 2));
             yield return new WaitForEndOfFrame();
         } while (speed > maxSpeed);
-        
+
+        speedUpRoutine = null;
         yield break;
 
     }
@@ -310,6 +317,7 @@ public class RootPlacement : MonoBehaviour
             UnityEngine.Debug.Log("sooo.. Thirsty... Can't go on... You Lose.");
             onPlayerDied.Raise(-currentTileCoord.y);
         }
+        
     }
 
     /****** ROOT TIP ANIMATION  *******/
