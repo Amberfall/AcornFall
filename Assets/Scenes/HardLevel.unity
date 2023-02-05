@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 579163343}
   - component: {fileID: 579163344}
   - component: {fileID: 579163345}
+  - component: {fileID: 579163346}
   m_Layer: 0
   m_Name: GameSessionController
   m_TagString: Untagged
@@ -502,6 +503,34 @@ MonoBehaviour:
       - m_Target: {fileID: 579163341}
         m_TargetAssemblyTypeName: GameSessionController, Assembly-CSharp
         m_MethodName: CheckForWin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &579163346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579163340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 064df41920222f14fbe0ca81ce1a96b9, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 579163341}
+        m_TargetAssemblyTypeName: GameSessionController, Assembly-CSharp
+        m_MethodName: RemoveBonusWater
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

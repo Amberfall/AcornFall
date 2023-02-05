@@ -312,7 +312,7 @@ public class RootPlacement : MonoBehaviour
             waterTileMap.SetTile(tileToCheck, null);
             waterRemaining += waterGainedFromDeposit;
             onWaterRemainingChanged.Raise(waterRemaining);
-            onDrankWaterDeposit.Raise(default);
+            onDrankWaterDeposit.Raise(tileToCheck);
         }
     }
 

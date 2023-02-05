@@ -172,4 +172,20 @@ public class GameSessionController : MonoBehaviour
         receivedNetworkingData.Raise(testCoordList);
     }
 
+    public void RemoveBonusWater(object data)
+    {
+        Vector3Int coord = (Vector3Int)data;
+        Vector3Int bonusCoord = new Vector3Int();
+        bonusCoord.x = coord.x;
+        bonusCoord.y = coord.y;
+        bonusCoord.z = currentLevel.buildIndex;
+
+        foreach(Vector3Int bonus in serverNetworking.Bonuses)
+        {
+            if(bonus == bonusCoord)
+            {
+                serverNetworking.ConsumeBonus(bonus);
+            }
+        }
+    }
 }

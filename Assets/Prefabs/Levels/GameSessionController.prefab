@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6974752231887129559}
   - component: {fileID: 6974752231887129558}
   - component: {fileID: 1127909590920621980}
+  - component: {fileID: 6713297244833028288}
   m_Layer: 0
   m_Name: GameSessionController
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depthRequiredToWin: 445
   playerWon: {fileID: 11400000, guid: ca981c7aed811a2468fbc4dd0e2127aa, type: 2}
+  receivedNetworkingData: {fileID: 0}
 --- !u!114 &6974752231887129544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +168,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: GameSessionController, Assembly-CSharp
         m_MethodName: PlayNextLevel
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6713297244833028288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974752231887129547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813d462d58759d54888d4f38defc47b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 064df41920222f14fbe0ca81ce1a96b9, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6974752231887129546}
+        m_TargetAssemblyTypeName: GameSessionController, Assembly-CSharp
+        m_MethodName: RemoveBonusWater
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
