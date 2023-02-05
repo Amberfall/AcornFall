@@ -44,7 +44,7 @@ public class CanvasController : MonoBehaviour
     public void setDepthGuageText(object data)
     {
         int currentDepth = (int)data;
-        depthGaugeText.text = currentDepth.ToString() + " / " + depthRequiredForWin.ToString();
+        depthGaugeText.text = currentDepth.ToString() + " / " + depthRequiredForWin.ToString() + " meters";
     }
 
     public void OpenWinPanel()

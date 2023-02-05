@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 1843123617
+    locked: 0
   - name: Dirt
     uniqueID: 3721402787
     locked: 0
