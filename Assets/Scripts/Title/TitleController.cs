@@ -24,9 +24,6 @@ public class TitleController : MonoBehaviour
     public AudioSource ButtonMouseOverSource;
     public AudioSource ButtonMouseClickSource;
 
-    ServerNetworking _snd;
-    PlayerNetworking _pn;
-    
     private void Awake()
     {
         ButtonsGroup.alpha = 0f;
@@ -37,7 +34,7 @@ public class TitleController : MonoBehaviour
     private void Start()
     {
         Debug.Log("TitleStart");
-        StartCoroutine(CheckForConnection());
+
 
         NetworkManager.Singleton.OnTransportFailure += new Action(() =>
         {
@@ -55,8 +52,9 @@ public class TitleController : MonoBehaviour
         else
         {
             var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
-            transport.ConnectAddress = "ggj.skipsabeatmusic.comwtfbbwq";
+            transport.ConnectAddress = "ggj.skipsabeatmusic.com";
             NetworkManager.Singleton.StartClient();
+            StartCoroutine(CheckForConnection());
         }
 #elif UNITY_SERVER
         // this is dumb, but it works, so it's not dumb.
@@ -65,17 +63,21 @@ public class TitleController : MonoBehaviour
         Application.targetFrameRate = 10;   
 
         var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
-        transport.ConnectAddress = "localhost";
+        transport.ConnectAddress = "ggj.skipsabeatmusic.com";
+        //transport.ConnectAddress = "localhost";
+        Debug.Log($"Host address is: {transport.ConnectAddress}");
         NetworkManager.Singleton.StartServer();
 #elif UNITY_WEBGL
         // auto connect to the server
         var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
-        transport.ConnectAddress = "34.105.51.253";
+        transport.ConnectAddress = "ggj.skipsabeatmusic.com";
+        //transport.ConnectAddress = "34.105.51.253";
         var success = NetworkManager.Singleton.StartClient();
         if (success == false)
         {
             Debug.LogError("Could not connect to server");
         }
+        StartCoroutine(CheckForConnection());
 #endif
     }
 

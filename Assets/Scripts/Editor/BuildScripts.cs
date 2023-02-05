@@ -18,7 +18,7 @@ public class BuildScripts : MonoBehaviour
             locationPathName = "Builds/BuildLinuxServer/RootGameServer.x86_64",
             target = BuildTarget.StandaloneLinux64,
             subtarget = (int)StandaloneBuildSubtarget.Server,
-            options = BuildOptions.Development
+            //options = BuildOptions.Development
         };
         
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
