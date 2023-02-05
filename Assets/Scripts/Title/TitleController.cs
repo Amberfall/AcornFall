@@ -28,7 +28,7 @@ public class TitleController : MonoBehaviour
     public AudioSource ButtonMouseOverSource;
     public AudioSource ButtonMouseClickSource;
 
-    public List<GameObject> TreePrefabs;
+    public TreeGrower TreePrefab;
 
     private void Awake()
     {
@@ -37,53 +37,58 @@ public class TitleController : MonoBehaviour
         
     }
 
-    private void Start()
+    void Start()
     {
         Debug.Log("TitleStart");
 
-        if (NetworkManager.Singleton.IsConnectedClient)
+        if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
         {
             OnServerConnected();
-        }
-#if UNITY_EDITOR
-        if (EditorCreateOurOwnHost)
-        {
-            // testing is in place, no need to connect to the cloud.
-            // we can instead be our own server
-            Debug.Log("Detected editor start. Creating our own local server and connecting to it");
-            NetworkManager.Singleton.StartHost();
+            return;
         }
         else
         {
+#if UNITY_EDITOR
+            if (EditorCreateOurOwnHost)
+            {
+                // testing is in place, no need to connect to the cloud.
+                // we can instead be our own server
+                Debug.Log("Detected editor start. Creating our own local server and connecting to it");
+                NetworkManager.Singleton.StartHost();
+                OnServerConnected();
+            }
+            else
+            {
+                var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
+                transport.ConnectAddress = "ggj.skipsabeatmusic.com";
+                NetworkManager.Singleton.StartClient();
+
+                StartCoroutine(CheckForConnection());
+            }
+#elif UNITY_SERVER
+            // this is dumb, but it works, so it's not dumb.
+            // except Unity is dumb.
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 10;   
+
             var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
             transport.ConnectAddress = "ggj.skipsabeatmusic.com";
-            NetworkManager.Singleton.StartClient();
-            
-            StartCoroutine(CheckForConnection());
-        }
-#elif UNITY_SERVER
-        // this is dumb, but it works, so it's not dumb.
-        // except Unity is dumb.
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 10;   
-
-        var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
-        transport.ConnectAddress = "ggj.skipsabeatmusic.com";
-        //transport.ConnectAddress = "localhost";
-        Debug.Log($"Host address is: {transport.ConnectAddress}");
-        NetworkManager.Singleton.StartServer();
+            //transport.ConnectAddress = "localhost";
+            Debug.Log($"Host address is: {transport.ConnectAddress}");
+            NetworkManager.Singleton.StartServer();
 #elif UNITY_WEBGL
-        // auto connect to the server
-        var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
-        transport.ConnectAddress = "ggj.skipsabeatmusic.com";
-        //transport.ConnectAddress = "34.105.51.253";
-        var success = NetworkManager.Singleton.StartClient();
-        if (success == false)
-        {
-            Debug.LogError("Could not connect to server");
-        }
-        StartCoroutine(CheckForConnection());
+            // auto connect to the server
+            var transport = NetworkManager.Singleton.GetComponent<WebSocketTransport>();
+            transport.ConnectAddress = "ggj.skipsabeatmusic.com";
+            //transport.ConnectAddress = "34.105.51.253";
+            var success = NetworkManager.Singleton.StartClient();
+            if (success == false)
+            {
+                Debug.LogError("Could not connect to server");
+            }
+            StartCoroutine(CheckForConnection());
 #endif
+        }
     }
 
     public void OnServerConnected()
@@ -138,10 +143,8 @@ public class TitleController : MonoBehaviour
 
             minTime = Mathf.Max(0.1f, minTime - 0.05f);
 
-            int prefabIndex = 0;
-
             Instantiate(
-                TreePrefabs[prefabIndex], 
+                TreePrefab,
                 new Vector3(Random.Range(-11, 11), 0, 0), 
                 Quaternion.identity);
         }
@@ -155,12 +158,11 @@ public class TitleController : MonoBehaviour
 
             minTime = Mathf.Max(0.1f, minTime - 0.05f);
 
-            int prefabIndex = 1;
-
-            Instantiate(
-                TreePrefabs[prefabIndex],
+            var newTree = Instantiate(
+                TreePrefab,
                 new Vector3(Random.Range(-11, 11), 0, 0),
                 Quaternion.identity);
+            newTree.MaxSize = 1;
         }
 
         numTrees = Mathf.Min(sn.Wins3, 50);
@@ -172,12 +174,11 @@ public class TitleController : MonoBehaviour
 
             minTime = Mathf.Max(0.1f, minTime - 0.05f);
 
-            int prefabIndex = 0;
-
-            Instantiate(
-                TreePrefabs[prefabIndex],
+            var newTree = Instantiate(
+                TreePrefab,
                 new Vector3(Random.Range(-11, 11), 0, 0),
                 Quaternion.identity);
+            newTree.MaxSize = 1;
         }
 
         WinCounterTM.text = $"Players before you have grown {sn.Wins1 + sn.Wins2 + sn.Wins3} trees!";
