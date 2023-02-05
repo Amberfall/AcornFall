@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430582ec14741f40810584b187c51e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditorCreateOurOwnHost: 1
+  EditorCreateOurOwnHost: 0
   LoadingTM: {fileID: 779244632}
   ConnectionFailedTM: {fileID: 1426129294}
   WinCounterTM: {fileID: 1490904721}
