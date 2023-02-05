@@ -10,6 +10,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] int verticalOffset = 3;
     [SerializeField] float maxSpeed = 5f;
 
+    [Header("Events")]
+    public GameEvent cameraInPlaceForTree;
+
+    bool arrivedAtFinalPosition = false;
+
     Vector3 currentVelocity;
     private void OnEnable()
     {
@@ -25,10 +30,16 @@ public class CameraController : MonoBehaviour
             targetCoord.y = playerRoot.currentTileCoord.y - verticalOffset;
             transform.position = Vector3.SmoothDamp(transform.position, targetCoord, ref currentVelocity, smoothTime);
         }
-        else //scroll back up to the top
+        else if (arrivedAtFinalPosition == false) //scroll back up to the top
         {
             Vector3 targetCoord = new Vector3(0, 5, -10);
             transform.position = Vector3.SmoothDamp(transform.position, targetCoord, ref currentVelocity, smoothTime, maxSpeed);
+            if( transform.position.y >= targetCoord.y - .05f )
+            {
+                cameraInPlaceForTree.Raise(default);
+                arrivedAtFinalPosition = true;
+
+            }
         }
         
     }
