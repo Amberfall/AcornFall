@@ -46,7 +46,7 @@ public class ServerNetworking : NetworkBehaviour
         }
         else
         {
-            
+            WriteState();
         }
 
         DontDestroyOnLoad(this);
@@ -125,10 +125,10 @@ public class ServerNetworking : NetworkBehaviour
         Debug.Log("Writing State");
         _serverDataNetworkVar.Value = new ServerData(Bonuses)
         {
-            Fails = this.Fails,
-            Wins1 = this.Wins1,
-            Wins2 = this.Wins2,
-            Wins3 = this.Wins3,
+            Fails = Fails,
+            Wins1 = Wins1,
+            Wins2 = Wins2,
+            Wins3 = Wins3,
         };            
     }
 
