@@ -115,7 +115,9 @@ public class ServerNetworking : NetworkBehaviour
             Wins3++;
             Debug.Log($"Adding win at difficulty: {difficulty}");
         }
-        
+
+        Debug.Log($"There are now: {Wins1 + Wins2 + Wins3} wins");
+
         WriteState();
     }
 
@@ -126,7 +128,10 @@ public class ServerNetworking : NetworkBehaviour
 
         if (_bonuses.Contains(loc) == false && _bonuses.Count < 100)
         {
+            Debug.Log($"Recording loss. There are now {Fails} total fails");
             Debug.Log($"Adding bonus at {loc}");
+            Debug.Log($"There are {_bonuses.Count} now");
+            
             _bonuses.Add(loc);
         }
 
@@ -138,8 +143,9 @@ public class ServerNetworking : NetworkBehaviour
     {
         if (_bonuses.Contains(loc))
         {
-            Debug.Log($"Consuming bonus at {loc}");
+            Debug.Log($"Consuming bonus at {loc}");            
             _bonuses.Remove(loc);
+            Debug.Log($"There are {_bonuses.Count} remaining");
             WriteState();
         }
     }
