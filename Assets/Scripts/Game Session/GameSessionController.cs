@@ -108,6 +108,8 @@ public class GameSessionController : MonoBehaviour
 
     public void RecordLoseCoord(Vector3Int coordinate)
     {
+        UnityEngine.Debug.Log("attempting to record loss... Checking for network.");
+
         if (serverNetworking != null)
         {
             Vector3Int lossCoordinate = new Vector3Int();
@@ -116,16 +118,25 @@ public class GameSessionController : MonoBehaviour
             int sceneNumber = currentLevel.buildIndex;
             lossCoordinate.z = sceneNumber;
             serverNetworking.RecordLoss(lossCoordinate);
+
+            UnityEngine.Debug.Log("recorded a loss at " + lossCoordinate);
         }
     }
 
     private void SendCoordListForWaterDrops()
     {
+        UnityEngine.Debug.Log("checking for networking script...");
         if(serverNetworking != null) 
         {
+            UnityEngine.Debug.Log("found network. preparing list of water tiles.");
             List<Vector3Int> coordList = new List<Vector3Int>();
 
             coordList = serverNetworking.Bonuses;
+
+            foreach( Vector3Int bonus in coordList )
+            {
+                UnityEngine.Debug.Log("found previous player coord at " + bonus);
+            }
 
             List<Vector3Int> thisLevelCoordList = new List<Vector3Int>();
 
@@ -137,7 +148,12 @@ public class GameSessionController : MonoBehaviour
                 }
             }
 
-            receivedNetworkingData.Raise(thisLevelCoordList);
+            if(thisLevelCoordList.Count > 0)
+            {
+                UnityEngine.Debug.Log("there are previous drops to spawn. Working on it...");
+                receivedNetworkingData.Raise(thisLevelCoordList);
+            }
+            
         }
         
 

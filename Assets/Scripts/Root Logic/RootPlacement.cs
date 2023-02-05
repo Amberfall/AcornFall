@@ -266,7 +266,6 @@ public class RootPlacement : MonoBehaviour
     {
         do
         {
-            UnityEngine.Debug.Log("modifying the speed...");
             speed = Mathf.MoveTowards(speed, maxSpeed, Time.deltaTime / (timeToReachMaxSpeed * 2));
             yield return new WaitForEndOfFrame();
         } while (speed > maxSpeed);
@@ -295,18 +294,18 @@ public class RootPlacement : MonoBehaviour
         if(tileToCheck.x < -10 || tileToCheck.x > 9 || tileToCheck.y > 0)
         {
             UnityEngine.Debug.Log("Out of bounds. Believe it or not, straight to jail!");
-            onPlayerDied.Raise(-currentTileCoord.y);
+            HandlePlayerDeath();
         }
         else if (rootAlreadyExists(tileToCheck))
         {
             UnityEngine.Debug.Log("Womp Womp. You Lose. Ran into yoself");
-            onPlayerDied.Raise(-currentTileCoord.y);
+            HandlePlayerDeath();
         }
         else if(ranIntoRock(tileToCheck)) 
         {
             UnityEngine.Debug.Log("OUCH... Hit a rock. You lose.");
             onHitRock.Raise(default);
-            onPlayerDied.Raise(-currentTileCoord.y);
+            HandlePlayerDeath();
         }
         else if(foundWater(tileToCheck)) 
         {
@@ -322,15 +321,16 @@ public class RootPlacement : MonoBehaviour
         if(waterRemaining <= 0)
         {
             UnityEngine.Debug.Log("sooo.. Thirsty... Can't go on... You Lose.");
-            onPlayerDied.Raise(-currentTileCoord.y);
+            HandlePlayerDeath();
         }
         
     }
 
     private void HandlePlayerDeath()
     {
-        onPlayerDied.Raise(-currentTileCoord.y);
         gameSessionController.RecordLoseCoord(prevTileCoord);
+        onPlayerDied.Raise(-currentTileCoord.y);
+        
     }
 
     /****** ROOT TIP ANIMATION  *******/
