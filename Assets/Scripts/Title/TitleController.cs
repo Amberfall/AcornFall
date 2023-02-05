@@ -41,12 +41,10 @@ public class TitleController : MonoBehaviour
     {
         Debug.Log("TitleStart");
 
-
-        NetworkManager.Singleton.OnTransportFailure += new Action(() =>
+        if (NetworkManager.Singleton.IsConnectedClient)
         {
-            Debug.Log("Transport Failure");
-        });
-
+            OnServerConnected();
+        }
 #if UNITY_EDITOR
         if (EditorCreateOurOwnHost)
         {
@@ -131,15 +129,16 @@ public class TitleController : MonoBehaviour
     {
         var sn = FindObjectOfType<ServerNetworking>();
         float minTime = 0.5f;
-        int numTrees = Mathf.Min(sn.Wins, 50);
+        int numTrees = Mathf.Min(sn.Wins1, 50);
+
+        Random.InitState(0);
         for (int i = 0; i < numTrees; i++)
         {
-            yield return new WaitForSeconds(minTime + Random.Range(minTime, 0.2f));
+            yield return new WaitForSeconds(minTime + Random.Range(minTime, minTime + 0.2f));
 
             minTime = Mathf.Max(0.1f, minTime - 0.05f);
 
-
-            int prefabIndex = Mathf.FloorToInt(Random.Range(0, TreePrefabs.Count - 1));
+            int prefabIndex = 0;
 
             Instantiate(
                 TreePrefabs[prefabIndex], 
@@ -147,7 +146,41 @@ public class TitleController : MonoBehaviour
                 Quaternion.identity);
         }
 
-        WinCounterTM.text = $"Players have grown {sn.Wins} trees!";
+        numTrees = Mathf.Min(sn.Wins2, 50);
+
+        Random.InitState(1);
+        for (int i = 0; i < numTrees; i++)
+        {
+            yield return new WaitForSeconds(minTime + Random.Range(minTime, minTime + 0.2f));
+
+            minTime = Mathf.Max(0.1f, minTime - 0.05f);
+
+            int prefabIndex = 1;
+
+            Instantiate(
+                TreePrefabs[prefabIndex],
+                new Vector3(Random.Range(-11, 11), 0, 0),
+                Quaternion.identity);
+        }
+
+        numTrees = Mathf.Min(sn.Wins3, 50);
+
+        Random.InitState(2);
+        for (int i = 0; i < numTrees; i++)
+        {
+            yield return new WaitForSeconds(minTime + Random.Range(minTime, minTime + 0.2f));
+
+            minTime = Mathf.Max(0.1f, minTime - 0.05f);
+
+            int prefabIndex = 0;
+
+            Instantiate(
+                TreePrefabs[prefabIndex],
+                new Vector3(Random.Range(-11, 11), 0, 0),
+                Quaternion.identity);
+        }
+
+        WinCounterTM.text = $"Players before you have grown {sn.Wins1 + sn.Wins2 + sn.Wins3} trees!";
         WinCounterTM.DOFade(1f, 0.25f);
 
     }

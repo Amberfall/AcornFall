@@ -10,7 +10,10 @@ using System;
 public class ServerNetworking : NetworkBehaviour
 {
     private int _fails = 0;
-    private int _wins = 4;
+    private int _wins1 = 4;
+    private int _wins2 = 1;
+    private int _wins3 = 1;
+
     private List<Vector3Int> _bonuses = new List<Vector3Int>();
 
     private readonly NetworkVariable<ServerData> _serverDataNetworkVar =
@@ -18,7 +21,9 @@ public class ServerNetworking : NetworkBehaviour
 
 
     public int Fails { get => _fails; private set => _fails = value; }
-    public int Wins { get => _wins; private set => _wins = value; }
+    public int Wins1 { get => _wins1; private set => _wins1 = value; }
+    public int Wins2 { get => _wins2; private set => _wins2 = value; }
+    public int Wins3 { get => _wins3; private set => _wins3 = value; }
     public List<Vector3Int> Bonuses { get => _bonuses; private set => _bonuses = value; }
     public ServerData ServerData { get => _serverDataNetworkVar.Value; }
 
@@ -50,7 +55,9 @@ public class ServerNetworking : NetworkBehaviour
     private void NetworkVarChanged(ServerData previousValue, ServerData newValue)
     {
         Fails = _serverDataNetworkVar.Value.Fails;
-        Wins = _serverDataNetworkVar.Value.Wins;
+        Wins1 = _serverDataNetworkVar.Value.Wins1;
+        Wins2 = _serverDataNetworkVar.Value.Wins2;
+        Wins3 = _serverDataNetworkVar.Value.Wins3;
 
         Bonuses.Clear();
         Bonuses.AddRange(_serverDataNetworkVar.Value.Bonuses);
@@ -58,7 +65,7 @@ public class ServerNetworking : NetworkBehaviour
 
     public void RecordWin(int difficulty)
     {
-        ClientRecordWinServerRPC();
+        ClientRecordWinServerRPC(difficulty);
     }
 
     public void RecordLoss(Vector3Int locOfDeath)
@@ -72,9 +79,21 @@ public class ServerNetworking : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ClientRecordWinServerRPC()
+    private void ClientRecordWinServerRPC(int difficulty)
     {
-        Wins++;
+        if (difficulty == 1)
+        {
+            Wins1++;
+        }
+        else if (difficulty == 2)
+        {
+            Wins2++;
+        }
+        else
+        {
+            Wins3++;
+        }
+        
         WriteState();
     }
 
@@ -107,7 +126,9 @@ public class ServerNetworking : NetworkBehaviour
         _serverDataNetworkVar.Value = new ServerData(Bonuses)
         {
             Fails = this.Fails,
-            Wins = this.Wins            
+            Wins1 = this.Wins1,
+            Wins2 = this.Wins2,
+            Wins3 = this.Wins3,
         };            
     }
 
@@ -116,7 +137,9 @@ public class ServerNetworking : NetworkBehaviour
     {
         Debug.Log("Reading State");
         Fails = _serverDataNetworkVar.Value.Fails;
-        Wins = _serverDataNetworkVar.Value.Wins;
+        Wins1 = _serverDataNetworkVar.Value.Wins1;
+        Wins2 = _serverDataNetworkVar.Value.Wins2;
+        Wins3 = _serverDataNetworkVar.Value.Wins3;
 
         Bonuses.Clear();
         Bonuses.AddRange(_serverDataNetworkVar.Value.Bonuses);
@@ -127,13 +150,17 @@ public class ServerNetworking : NetworkBehaviour
 public struct ServerData : INetworkSerializable
 {
     public int Fails;
-    public int Wins;
+    public int Wins1;
+    public int Wins2;
+    public int Wins3;
     public Vector3Int[] Bonuses;
 
     public ServerData(List<Vector3Int> bonusList)
     {
         Fails = 0;
-        Wins = 0;
+        Wins1 = 0;
+        Wins2 = 0;
+        Wins3 = 0;
         Bonuses = bonusList.ToArray();
     }
 
@@ -141,7 +168,9 @@ public struct ServerData : INetworkSerializable
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref Fails);
-        serializer.SerializeValue(ref Wins);
+        serializer.SerializeValue(ref Wins1);
+        serializer.SerializeValue(ref Wins2);
+        serializer.SerializeValue(ref Wins3);
 
         if (Bonuses == null)
             Bonuses = new Vector3Int[0] { };
