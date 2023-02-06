@@ -75,17 +75,13 @@ public class GameSessionController : MonoBehaviour
     {
         if((int)data >= depthRequiredToWin)
         {
-            UnityEngine.Debug.Log("reached required depth for win condition.");
-            playerWon.Raise(default);
+            WinGame();
         }
     }
     public void WinGame()
     {
-        if(serverNetworking!= null)
-        {
-            serverNetworking.RecordWin(currentLevel.buildIndex);
-        }
-        
+        RecordWin();
+        playerWon.Raise(default);
     }
 
     IEnumerator DeathSequence()
@@ -120,6 +116,14 @@ public class GameSessionController : MonoBehaviour
             serverNetworking.RecordLoss(lossCoordinate);
 
             UnityEngine.Debug.Log("recorded a loss at " + lossCoordinate);
+        }
+    }
+
+    public void RecordWin()
+    {
+        if (serverNetworking != null)
+        {
+            serverNetworking.RecordWin(currentLevel.buildIndex);
         }
     }
 
